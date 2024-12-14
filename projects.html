@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matteo Ercolino - Progetti</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white font-sans antialiased overflow-x-hidden">
+<header class="fixed w-full top-0 left-0 z-50 backdrop-blur-xl bg-white/10 border-b border-white/20">
+  <div class="container mx-auto px-8 py-5 flex justify-between items-center">
+    <div class="text-2xl font-black tracking-tight text-white">Matteo Ercolino</div>
+    <nav class="hidden md:flex space-x-8 text-lg font-medium">
+      <a href="index.html#about" class="nav-link text-white/90 hover:text-cyan-300">Chi Sono</a>
+      <a href="projects.html" class="nav-link text-cyan-200 font-semibold hover:text-cyan-300">Progetti</a>
+      <a href="publications.html" class="nav-link text-white/90 hover:text-cyan-300">Pubblicazioni</a>
+      <a href="contact.html" class="nav-link text-white/90 hover:text-cyan-300">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pt-40 pb-32 min-h-screen px-4">
+  <div class="container mx-auto">
+    <h1 class="text-5xl font-bold mb-16 text-center tracking-tight drop-shadow-lg">Progetti</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
+      <div class="project-card relative p-8 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+        <h3 class="text-3xl font-semibold mb-4 drop-shadow-lg">CLASS Meta Quest</h3>
+        <p class="text-white/90 mb-8 leading-relaxed">Applicazione VR basata su REBT per sviluppare abilità metacognitive.</p>
+        <a href="https://github.com/matthew-2000/CLASS_UnityProjecty" target="_blank" class="btn btn-outline w-fit">Visualizza</a>
+      </div>
+
+      <div class="project-card relative p-8 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+        <h3 class="text-3xl font-semibold mb-4 drop-shadow-lg">WakeApp</h3>
+        <p class="text-white/90 mb-8 leading-relaxed">Piattaforma AI per supportare individui con depressione maggiore.</p>
+        <a href="https://github.com/matthew-2000/WakeApp" target="_blank" class="btn btn-outline w-fit">Visualizza</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-8 bg-white/10 backdrop-blur-xl border-t border-white/20 text-white text-center text-sm">
+  <p>&copy; 2024 Matteo Ercolino - Tutti i diritti riservati</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

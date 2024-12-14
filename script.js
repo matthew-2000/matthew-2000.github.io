@@ -1,31 +1,46 @@
-// Animazioni di scroll
-document.addEventListener("DOMContentLoaded", function () {
-    const scrollElements = document.querySelectorAll(".scroll-element");
-
-    const elementInView = (el, divisor = 1) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return (
-            elementTop <= (window.innerHeight || document.documentElement.clientHeight) / divisor
-        );
-    };
-
-    const displayScrollElement = (element) => {
-        element.classList.add("scrolled");
-    };
-
-    const hideScrollElement = (element) => {
-        element.classList.remove("scrolled");
-    };
-
-    const handleScrollAnimation = () => {
-        scrollElements.forEach((el) => {
-            if (elementInView(el, 1.25)) {
-                displayScrollElement(el);
-            } else {
-                hideScrollElement(el);
-            }
-        });
-    };
-
-    window.addEventListener("scroll", handleScrollAnimation);
+// GSAP Animations
+gsap.from("header", {
+    y: -80, opacity: 0, duration: 1, ease: "power4.out"
 });
+
+gsap.from("#hero h1 span", {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    ease: "power4.out",
+    stagger: 0.2
+});
+
+gsap.from("#hero p", {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    delay: 1.2,
+    ease: "power4.out"
+});
+
+gsap.from("#hero .btn", {
+    opacity: 0,
+    scale: 0.95,
+    duration: 1,
+    delay: 1.5,
+    ease: "power4.out"
+});
+
+// Fade-in sezioni scorrendo la pagina
+function fadeInOnScroll(trigger) {
+    gsap.from(trigger, {
+        scrollTrigger: {
+            trigger: trigger,
+            start: "top 80%",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: "power4.out"
+    });
+}
+
+fadeInOnScroll("#about");
+fadeInOnScroll("h1");
+fadeInOnScroll(".project-card");
