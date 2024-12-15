@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Algoritmi per la Realtà Virtuale",
+    "authors": "Matteo Ercolino, Giovanni Rossi",
+    "description": "Studio di algoritmi avanzati per migliorare la percezione spaziale nelle applicazioni VR.",
+    "link": "https://example.com/publicazione-1"
+  },
+  {
+    "title": "AI per la Salute Mentale",
+    "authors": "Matteo Ercolino, Chiara Bianchi",
+    "description": "Utilizzo dell'Intelligenza Artificiale per sviluppare strumenti di supporto alla salute mentale.",
+    "link": "https://example.com/publicazione-2"
+  }
+]
