@@ -2,66 +2,542 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Matteo Ercolino - Home</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Matteo Ercolino — Software Engineer specializzato in Mobile, Web ed Extended Reality. Scopri portfolio, progetti, pubblicazioni e contatti." />
+    <meta name="keywords" content="Matteo Ercolino, Software Engineer, Mobile, Web, XR, Extended Reality, Portfolio" />
+    <meta name="author" content="Matteo Ercolino" />
+    <title>Matteo Ercolino — Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="https://fav.farm/🚀" />
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white font-sans antialiased overflow-x-hidden">
-<header class="fixed w-full top-0 left-0 z-50 backdrop-blur-xl bg-white/10 border-b border-white/20">
-    <div class="container mx-auto px-8 py-5 flex justify-between items-center">
-        <div class="text-2xl font-black tracking-tight text-white">Matteo Ercolino</div>
-        <nav class="hidden md:flex space-x-8 text-lg font-medium">
-            <a href="#about" class="nav-link text-white/90 hover:text-cyan-300">Chi Sono</a>
-            <a href="projects.html" class="nav-link text-white/90 hover:text-cyan-300">Progetti</a>
-            <a href="publications.html" class="nav-link text-white/90 hover:text-cyan-300">Pubblicazioni</a>
-            <a href="contact.html" class="nav-link text-white/90 hover:text-cyan-300">Contatti</a>
-        </nav>
+<body class="theme-dark">
+    <div class="global-bg" aria-hidden="true">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="gradient-sphere sphere-one" aria-hidden="true"></div>
+        <div class="gradient-sphere sphere-two" aria-hidden="true"></div>
+        <div class="noise-overlay" aria-hidden="true"></div>
     </div>
-</header>
 
-<section id="hero" class="h-screen w-full flex items-center justify-center relative overflow-hidden px-4">
-    <div class="text-center max-w-3xl">
-        <h1 class="text-6xl md:text-8xl font-black leading-tight mb-8 tracking-tighter drop-shadow-lg">
-            <span class="block">Ideare.</span>
-            <span class="block">Creare.</span>
-            <span class="block">Innovare.</span>
-        </h1>
-        <p class="text-xl md:text-2xl font-light mb-12 text-white/90 drop-shadow-md">Sono Matteo, Ingegnere del Software. Trasformo visioni in esperienze digitali su mobile, AR/VR e oltre.</p>
-        <a href="#about" class="btn btn-primary">Scopri di più</a>
-    </div>
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/80">
-        <i class="fas fa-chevron-down text-3xl animate-bounce"></i>
-    </div>
-</section>
-
-<section id="about" class="py-32 relative px-4">
-    <div class="container mx-auto">
-        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-12 max-w-3xl mx-auto text-center shadow-xl">
-            <h2 class="text-5xl font-bold mb-10 tracking-tight drop-shadow-lg">Chi Sono</h2>
-            <p class="text-xl leading-relaxed text-white/90 mb-8">Sono uno sviluppatore con esperienza nel campo mobile, AR/VR e soluzioni software su misura. Unisco design e tecnologia per creare prodotti straordinari.</p>
-            <div class="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-                <a href="projects.html" class="btn btn-outline">Progetti</a>
-                <a href="publications.html" class="btn btn-outline">Pubblicazioni</a>
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a class="brand" href="#hero">Matteo Ercolino</a>
+            <nav class="nav-links" aria-label="Primary navigation">
+                <a href="#about">Chi sono</a>
+                <a href="#skills">Competenze</a>
+                <a href="#experience">Esperienze</a>
+                <a href="#projects">Progetti</a>
+                <a href="#contact">Contatti</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Cambia tema">
+                    <i data-lucide="moon-star"></i>
+                    <span>Dark</span>
+                </button>
+                <button class="menu-toggle" aria-label="Apri il menu mobile">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
         </div>
-    </div>
-</section>
+        <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+            <a href="#about">Chi sono</a>
+            <a href="#skills">Competenze</a>
+            <a href="#experience">Esperienze</a>
+            <a href="#education">Formazione</a>
+            <a href="#projects">Progetti</a>
+            <a href="#music">Music</a>
+            <a href="#contact">Contatti</a>
+            <button class="cta-primary" data-open-cv>Visualizza CV</button>
+        </div>
+    </header>
 
-<footer class="py-8 bg-white/10 backdrop-blur-xl border-t border-white/20 text-white text-center text-sm">
-    <p>&copy; 2024 Matteo Ercolino - Tutti i diritti riservati</p>
-</footer>
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div class="hero-meta">
+                    <span class="badge badge-glow">Disponibile per collaborazioni selezionate</span>
+                    <span class="divider"></span>
+                    <span class="location"><i data-lucide="map-pin"></i> Salerno · Italia</span>
+                </div>
+                <h1 class="hero-title">Matteo Ercolino</h1>
+                <p class="hero-role">Software Engineer — Mobile • Web • XR</p>
+                <p class="hero-subtitle">Costruisco esperienze digitali che uniscono tecnologia, creatività e interazione umana.</p>
+                <div class="hero-cta">
+                    <a class="cta-primary" href="assets/Matteo-Ercolino-CV.pdf" download>Download CV</a>
+                    <button class="cta-secondary" data-open-cv>Preview CV</button>
+                    <a class="cta-tertiary" href="#projects">Esplora i miei progetti</a>
+                    <a class="cta-ghost" href="#contact">Contattami</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <p class="stat-number">6<span>+</span></p>
+                        <p class="stat-label">anni tra mobile e web</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-number">3<span>+</span></p>
+                        <p class="stat-label">anni in extended reality</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-number">30k<span>+</span></p>
+                        <p class="stat-label">utenti raggiunti</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-header">
+                        <span class="pulse"></span>
+                        <p>Realtime Experience Designer</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="quote">“Tecnologia, empatia e narrazione si intrecciano per dare forma a prodotti memorabili.”</p>
+                        <ul class="focus-tags">
+                            <li>Immersive UX</li>
+                            <li>Spatial Computing</li>
+                            <li>AI + XR</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="floating-widget">
+                    <i data-lucide="sparkles"></i>
+                    <div>
+                        <p class="title">Design Systems</p>
+                        <p class="caption">Workflow fluidi tra team cross-funzionali.</p>
+                    </div>
+                </div>
+                <div class="floating-widget secondary">
+                    <i data-lucide="vr"></i>
+                    <div>
+                        <p class="title">XR Innovation</p>
+                        <p class="caption">Prototipazione rapida di esperienze immersive.</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="scroll-indicator" aria-label="Scorri verso il basso">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </a>
+        </section>
 
-<script src="script.js"></script>
+        <section id="about" class="section about">
+            <div class="section-heading">
+                <span class="section-kicker">Chi Sono</span>
+                <h2>Ricerca, usabilità ed esperienze immersive</h2>
+                <p>Un approccio olistico allo sviluppo: strategia, design dell'interazione e realizzazione tecnica.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Visione</h3>
+                    <p>Sviluppatore con esperienza 6+ anni tra mobile e web, 3+ anni in realtà estesa. Guardo oltre l’interfaccia, costruendo ecosistemi digitali coerenti.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Ricerca & Teaching</h3>
+                    <p>Forte orientamento alla ricerca, all’usabilità e alla progettazione di esperienze digitali immersive. Esperienza come docente universitario per corsi Python.</p>
+                </div>
+                <div class="about-card highlight">
+                    <h3>Passione</h3>
+                    <p>Affascinato da tecnologie emergenti, interaction design e nuovi modelli di narrazione interattiva.</p>
+                </div>
+            </div>
+            <div class="about-footer">
+                <div class="about-pill">
+                    <i data-lucide="beaker"></i>
+                    <span>Ricerca applicata</span>
+                </div>
+                <div class="about-pill">
+                    <i data-lucide="users"></i>
+                    <span>Design centrato sull'utente</span>
+                </div>
+                <div class="about-pill">
+                    <i data-lucide="workflow"></i>
+                    <span>Team leadership</span>
+                </div>
+                <button class="cta-outline" data-open-cv>Apri il CV</button>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills">
+            <div class="section-heading">
+                <span class="section-kicker">Competenze</span>
+                <h2>Stack completo per prodotti scalabili e immersivi</h2>
+                <p>Dal concept alla delivery con un mix bilanciato di competenze tecniche e soft skills.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-block">
+                    <h3>Hard Skills Core</h3>
+                    <div class="skill-matrix">
+                        <div class="skill-item" data-years="6+">
+                            <span>Mobile development</span>
+                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="6+">
+                            <span>Web development</span>
+                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="3+">
+                            <span>Extended Reality</span>
+                            <div class="skill-bar"><span style="--value: 0.75"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="6+">
+                            <span>Swift</span>
+                            <div class="skill-bar"><span style="--value: 0.9"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="7+">
+                            <span>Java</span>
+                            <div class="skill-bar"><span style="--value: 1"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="4+">
+                            <span>Python</span>
+                            <div class="skill-bar"><span style="--value: 0.8"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="3+">
+                            <span>C#</span>
+                            <div class="skill-bar"><span style="--value: 0.7"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="5+">
+                            <span>JavaScript</span>
+                            <div class="skill-bar"><span style="--value: 0.85"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="5+">
+                            <span>HTML / CSS</span>
+                            <div class="skill-bar"><span style="--value: 0.85"></span></div>
+                        </div>
+                        <div class="skill-item" data-years="7+">
+                            <span>C</span>
+                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h3>Tecnologie</h3>
+                    <div class="tech-tags">
+                        <span>IntelliJ IDEA</span>
+                        <span>Xcode</span>
+                        <span>Unity</span>
+                        <span>Android Studio</span>
+                        <span>MongoDB</span>
+                        <span>MySQL</span>
+                        <span>Firebase</span>
+                        <span>Figma</span>
+                        <span>Slack</span>
+                        <span>Docker</span>
+                        <span>SonarCloud</span>
+                        <span>NodeJS</span>
+                        <span>Flask</span>
+                        <span>OpenAI API</span>
+                    </div>
+                </div>
+                <div class="skill-block">
+                    <h3>Soft Skills</h3>
+                    <div class="soft-grid">
+                        <div class="soft-card">
+                            <i data-lucide="message-circle"></i>
+                            <span>Comunicazione</span>
+                        </div>
+                        <div class="soft-card">
+                            <i data-lucide="target"></i>
+                            <span>Leadership</span>
+                        </div>
+                        <div class="soft-card">
+                            <i data-lucide="calendar"></i>
+                            <span>Organizzazione</span>
+                        </div>
+                        <div class="soft-card">
+                            <i data-lucide="lightbulb"></i>
+                            <span>Problem Solving</span>
+                        </div>
+                        <div class="soft-card">
+                            <i data-lucide="handshake"></i>
+                            <span>Collaborazione</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section experience">
+            <div class="section-heading">
+                <span class="section-kicker">Esperienze</span>
+                <h2>Impatto misurabile in progetti accademici e industriali</h2>
+                <p>Timeline interattiva con outcome, tecnologie chiave e responsabilità.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-track"></div>
+                <article class="timeline-card">
+                    <div class="timeline-meta">
+                        <span class="timeline-date">2025 — In corso</span>
+                        <span class="timeline-org">UNISA · Progetto PRIN MediArSI</span>
+                    </div>
+                    <h3>Sviluppatore Web — MediArSI</h3>
+                    <p>Web app responsive per committenze artistiche XI-XIII secolo. Gestione autonoma di architettura, sviluppo e UX.</p>
+                    <div class="timeline-tags">
+                        <span>Next.js</span>
+                        <span>GSAP</span>
+                        <span>Design System</span>
+                    </div>
+                </article>
+                <article class="timeline-card">
+                    <div class="timeline-meta">
+                        <span class="timeline-date">2023 — In corso</span>
+                        <span class="timeline-org">HCI-USE Lab</span>
+                    </div>
+                    <h3>Collaborazione accademica · Pubblicazione</h3>
+                    <p>Ricerca su tecnologie immersive, progettazione e sviluppo di prototipi XR. Tesi triennale e magistrale in Extended Reality.</p>
+                    <div class="timeline-tags">
+                        <span>Unity</span>
+                        <span>UX Research</span>
+                        <span>XR</span>
+                    </div>
+                </article>
+                <article class="timeline-card">
+                    <div class="timeline-meta">
+                        <span class="timeline-date">2024 — 2025</span>
+                        <span class="timeline-org">UNINT Roma</span>
+                    </div>
+                    <h3>Docente Python</h3>
+                    <p>Corsi “Introduzione alla Programmazione in Python” e “Python Programming for Hacking”. Percorsi hands-on con focus su creatività computazionale.</p>
+                    <div class="timeline-tags">
+                        <span>Didattica</span>
+                        <span>Python</span>
+                        <span>Interactive Labs</span>
+                    </div>
+                </article>
+                <article class="timeline-card">
+                    <div class="timeline-meta">
+                        <span class="timeline-date">2023 — 2024</span>
+                        <span class="timeline-org">Fondazione Formit · UNINT</span>
+                    </div>
+                    <h3>Sviluppatore VR — CLASS</h3>
+                    <p>App VR basata su REBT per abilità metacognitive. Progettazione experience flow, sviluppo Unity e ottimizzazione Meta Quest.</p>
+                    <div class="timeline-tags">
+                        <span>Unity</span>
+                        <span>Oculus SDK</span>
+                        <span>XR Research</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="education" class="section education">
+            <div class="section-heading">
+                <span class="section-kicker">Formazione</span>
+                <h2>Accademia e ricerca per una visione completa</h2>
+            </div>
+            <div class="education-grid">
+                <article class="education-card">
+                    <span class="education-date">Laurea Magistrale in Informatica — 110 e lode</span>
+                    <h3>Università di Salerno</h3>
+                    <p class="education-thesis">Tesi: “Agenti virtuali adattivi: studio e design di agenti conversazionali in Extended Reality”.</p>
+                </article>
+                <article class="education-card">
+                    <span class="education-date">Laurea Triennale in Informatica</span>
+                    <h3>Università di Salerno</h3>
+                    <p class="education-thesis">Tesi: “Progettazione e sviluppo di un’app in realtà aumentata in ambienti culturali”.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="publications" class="section publications">
+            <div class="section-heading">
+                <span class="section-kicker">Pubblicazioni</span>
+                <h2>Disseminare conoscenza</h2>
+                <p>Ricerca applicata alla user experience e alla realtà estesa.</p>
+            </div>
+            <div class="publication-card">
+                <div class="pub-meta">
+                    <span class="badge badge-outline">ACM CHIGREECE '23</span>
+                    <span class="pub-year">2023</span>
+                </div>
+                <h3>Designing Virtual Interactive Objects to Enhance Visitors’ Experience in Cultural Exhibits</h3>
+                <p>Studio e progettazione di oggetti interattivi virtuali per mostre culturali, con focus su engagement e narrazione.</p>
+                <a class="cta-link" href="https://doi.org/10.1145/3609987.3610110" target="_blank" rel="noopener">Leggi la pubblicazione</a>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects">
+            <div class="section-heading">
+                <span class="section-kicker">Progetti selezionati</span>
+                <h2>Esperienze immersive e prodotti digitali real-world</h2>
+                <p>Card animate con approfondimenti e link diretti.</p>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-visual project-class"></div>
+                    <div class="project-content">
+                        <span class="project-type">XR · Meta Quest</span>
+                        <h3>CLASS</h3>
+                        <p>Esperienza VR basata su REBT per supportare abilità metacognitive. Realizzata con Unity e Oculus SDK.</p>
+                        <div class="project-tags">
+                            <span>Unity</span>
+                            <span>Oculus SDK</span>
+                            <span>XR Research</span>
+                        </div>
+                        <a class="cta-link" href="https://www.meta.com/experiences/27531600243090916/" target="_blank" rel="noopener">Esplora l'esperienza</a>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <div class="project-visual project-wakeapp"></div>
+                    <div class="project-content">
+                        <span class="project-type">AI · Mobile · Flutter</span>
+                        <h3>WakeApp</h3>
+                        <p>Supporto alle persone con depressione maggiore tramite AI e riconoscimento emozionale. Vincitore “Giuria Coach”.</p>
+                        <div class="project-tags">
+                            <span>Flutter</span>
+                            <span>Python</span>
+                            <span>AI</span>
+                        </div>
+                        <a class="cta-link" href="https://github.com/matthew-2000/WakeApp" target="_blank" rel="noopener">Apri il repository</a>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <div class="project-visual project-campus"></div>
+                    <div class="project-content">
+                        <span class="project-type">Mobile · iOS & Android</span>
+                        <h3>CampUs Unisa</h3>
+                        <p>App multipiattaforma per studenti universitari con oltre 30.000 download complessivi.</p>
+                        <div class="project-tags">
+                            <span>Swift</span>
+                            <span>Kotlin</span>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.silvered.campus" target="_blank" rel="noopener">Android</a>
+                            <a class="cta-link" href="https://apps.apple.com/it/app/campus-unisa/id1519983095" target="_blank" rel="noopener">iOS</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="music" class="section music">
+            <div class="section-heading">
+                <span class="section-kicker">Music</span>
+                <h2>Groove e tecnologia</h2>
+                <p>Il basso elettrico come strumento per esplorare ritmo, ascolto e improvvisazione. Energia che porto anche nei team.</p>
+            </div>
+            <div class="music-card">
+                <div class="music-visual"></div>
+                <div class="music-content">
+                    <h3>Bassista · Live & Studio</h3>
+                    <p>Performance live con band jazz-funk e session in studio per progetti indipendenti. Collaborazioni con artisti emergenti, cura degli arrangiamenti e sound design.</p>
+                    <div class="music-tags">
+                        <span>Improvisation</span>
+                        <span>Teamwork</span>
+                        <span>Stage Presence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="section-heading">
+                <span class="section-kicker">Contatti</span>
+                <h2>Costruiamo il prossimo progetto</h2>
+                <p>Scrivimi per collaborazioni, consulenze o talk.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i data-lucide="mail"></i>
+                        <a href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <i data-lucide="github"></i>
+                        <a href="https://github.com/matthew-2000" target="_blank" rel="noopener">github.com/matthew-2000</a>
+                    </div>
+                    <div class="contact-card">
+                        <i data-lucide="linkedin"></i>
+                        <a href="https://linkedin.com/in/matteo-ercolino-b40054211/" target="_blank" rel="noopener">linkedin.com/in/matteo-ercolino</a>
+                    </div>
+                    <div class="contact-card">
+                        <i data-lucide="phone"></i>
+                        <a href="tel:+393517706576">+39 351 770 6576</a>
+                    </div>
+                    <div class="contact-cta">
+                        <span>Calendario meeting su richiesta</span>
+                        <a class="cta-outline" href="mailto:matteo.ercolino01@gmail.com">Prenota una call</a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" placeholder="Il tuo nome" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="nome@email.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Raccontami la tua idea" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-primary">Invia messaggio</button>
+                    <p class="form-feedback" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; <span id="year"></span> Matteo Ercolino. Crafted with passione, design e codice.</p>
+            <div class="footer-links">
+                <a href="#hero">Torna su</a>
+                <a href="#projects">Progetti</a>
+                <a href="#contact">Contatti</a>
+            </div>
+        </div>
+    </footer>
+
+    <dialog id="cvModal" class="modal" aria-labelledby="cvModalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="cvModalTitle">Curriculum Vitae</h2>
+                <button class="modal-close" data-close-cv aria-label="Chiudi la modale">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section>
+                    <h3>Profilo</h3>
+                    <p>Software Engineer specializzato in esperienze immersive e prodotti digitali full-stack. Forte attitudine al lavoro cross-disciplinare, mentorship e ricerca accademica.</p>
+                </section>
+                <section>
+                    <h3>Esperienza</h3>
+                    <ul>
+                        <li><strong>2025—</strong> Sviluppatore Web, Progetto PRIN MediArSI – UNISA</li>
+                        <li><strong>2023—</strong> Collaboratore accademico, HCI-USE Lab</li>
+                        <li><strong>2024—2025</strong> Docente Python, UNINT Roma</li>
+                        <li><strong>2023—2024</strong> Sviluppatore VR, Fondazione Formit / UNINT</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Competenze</h3>
+                    <ul class="modal-tags">
+                        <li>Mobile &amp; Web</li>
+                        <li>Extended Reality</li>
+                        <li>Unity</li>
+                        <li>Swift</li>
+                        <li>Python</li>
+                        <li>Design System</li>
+                        <li>Team Leadership</li>
+                    </ul>
+                </section>
+                <div class="modal-actions">
+                    <a class="cta-primary" href="assets/Matteo-Ercolino-CV.pdf" download>Scarica PDF</a>
+                    <button class="cta-outline" data-close-cv>Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
 </body>
 </html>
