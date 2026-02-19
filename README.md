@@ -4,7 +4,7 @@ Sito personale minimal, dinamico e responsive per Matteo Ercolino, Software Engi
 
 ## 🚀 Caratteristiche
 - Hero section con particellare interattivo, statistiche e CTA multiple.
-- Sezioni About, Skills, Esperienza, Formazione, Pubblicazioni, Progetti, Music e Contatti.
+- Sezioni About, Skills, Esperienza, Formazione, Pubblicazioni, Lingue, Progetti, Attività extracurriculari e Contatti.
 - Micro-interazioni con GSAP, Lenis per smooth scrolling, animazioni delle barre competenze.
 - Modal per il CV con download diretto.
 - Tema dark/light con persistenza locale e navigazione mobile animata.

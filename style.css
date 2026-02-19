@@ -170,7 +170,8 @@ body.theme-light .noise-overlay {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
