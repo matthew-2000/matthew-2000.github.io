@@ -10,8 +10,11 @@
   }
 
   const source = main.getAttribute('data-publications-source');
+  const initialUrl = new URL(window.location.href);
+
   let allItems = [];
   let highlightName = '';
+  let searchQuery = (initialUrl.searchParams.get('q') || '').trim();
 
   function prefersReducedMotion() {
     if (motion && typeof motion.useReducedMotion === 'function') {
@@ -58,63 +61,71 @@
     ].join('');
   }
 
+  function renderDetailedExtras(item, index) {
+    const links = (item.links || [])
+      .map(function renderLink(link) {
+        return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(link.label) + '</a>';
+      })
+      .join(' · ');
+
+    const hasAbstract = typeof item.abstract === 'string' && item.abstract.trim().length > 0;
+    const hasBibtex = typeof item.bibtex === 'string' && item.bibtex.trim().length > 0;
+
+    const accordionItems = [];
+    if (hasAbstract) {
+      accordionItems.push(
+        renderAccordionItem(
+          'abstract-' + index,
+          index,
+          'Abstract',
+          '<p class="accordion-content">' + escapeHtml(item.abstract) + '</p>'
+        )
+      );
+    }
+
+    if (hasBibtex) {
+      const bibtexCodeId = 'bibtex-code-' + index;
+      accordionItems.push(
+        renderAccordionItem(
+          'bibtex-' + index,
+          index,
+          'BibTeX',
+          [
+            '<pre id="' + bibtexCodeId + '">' + escapeHtml(item.bibtex) + '</pre>',
+            '<button class="copy-bibtex" type="button" data-target="' + bibtexCodeId + '">Copy</button>'
+          ].join('')
+        )
+      );
+    }
+
+    const accordionBlock = accordionItems.length
+      ? '<div class="pub-accordion">' + accordionItems.join('') + '</div>'
+      : '';
+
+    return [
+      links ? '<p class="pub-links">' + links + '</p>' : '',
+      accordionBlock
+    ].join('');
+  }
+
   function render(items) {
     results.textContent = items.length + ' publication' + (items.length === 1 ? '' : 's');
+    list.classList.remove('is-mode-compact');
+    list.classList.add('is-mode-detailed');
 
     if (!items.length) {
-      list.innerHTML = '<li class="empty-state">No publications for this type.</li>';
+      list.innerHTML = '<li class="empty-state">No publications for this filter.</li>';
       return;
     }
 
     list.innerHTML = items
       .map(function renderItem(item, index) {
-        const links = (item.links || [])
-          .map(function renderLink(link) {
-            return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(link.label) + '</a>';
-          })
-          .join(' · ');
-
-        const hasAbstract = typeof item.abstract === 'string' && item.abstract.trim().length > 0;
-        const hasBibtex = typeof item.bibtex === 'string' && item.bibtex.trim().length > 0;
-
-        const accordionItems = [];
-        if (hasAbstract) {
-          accordionItems.push(
-            renderAccordionItem(
-              'abstract-' + index,
-              index,
-              'Abstract',
-              '<p class="accordion-content">' + escapeHtml(item.abstract) + '</p>'
-            )
-          );
-        }
-
-        if (hasBibtex) {
-          const bibtexCodeId = 'bibtex-code-' + index;
-          accordionItems.push(
-            renderAccordionItem(
-              'bibtex-' + index,
-              index,
-              'BibTeX',
-              [
-                '<pre id="' + bibtexCodeId + '">' + escapeHtml(item.bibtex) + '</pre>',
-                '<button class="copy-bibtex" type="button" data-target="' + bibtexCodeId + '">Copy</button>'
-              ].join('')
-            )
-          );
-        }
-
-        const accordionBlock = accordionItems.length
-          ? '<div class="pub-accordion">' + accordionItems.join('') + '</div>'
-          : '';
-
         return [
           '<li class="pub-item">',
           '<p class="pub-authors">' + formatAuthors(item.authors || []) + ' (' + escapeHtml(item.year) + ').</p>',
           '<p class="pub-title">' + escapeHtml(item.title) + '.</p>',
           '<p class="pub-venue">' + escapeHtml(item.venue) + ' · ' + escapeHtml(item.type) + '.</p>',
-          links ? '<p class="pub-links">' + links + '</p>' : '',
-          accordionBlock,
+          renderDetailedExtras(item, index),
           '</li>'
         ].join('');
       })
@@ -211,13 +222,32 @@
     }
   }
 
+  function normalizedSearch() {
+    return searchQuery.trim().toLowerCase();
+  }
+
   function applyFilter() {
     const type = filter.value;
-    const filtered = type === 'All'
-      ? allItems
-      : allItems.filter(function filterByType(item) {
-          return item.type === type;
-        });
+    const query = normalizedSearch();
+
+    const filtered = allItems.filter(function filterItem(item) {
+      if (type !== 'All' && item.type !== type) {
+        return false;
+      }
+
+      if (!query) {
+        return true;
+      }
+
+      const haystack = [item.title, item.venue, item.year]
+        .map(function mapPart(part) {
+          return String(part || '').toLowerCase();
+        })
+        .join(' ');
+
+      return haystack.indexOf(query) !== -1;
+    });
+
     render(filtered);
   }
 
