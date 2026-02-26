@@ -1,32 +1,17 @@
-# Portfolio — Matteo Ercolino
+# Matteo Ercolino - Academic Website
 
-Sito personale minimal, dinamico e responsive per Matteo Ercolino, Software Engineer specializzato in Mobile, Web ed Extended Reality.
+Minimal multi-page academic website for a PhD student profile.
 
-## 🚀 Caratteristiche
-- Hero section con particellare interattivo, statistiche e CTA multiple.
-- Sezioni About, Skills, Esperienza, Formazione, Pubblicazioni, Lingue, Progetti, Attività extracurriculari e Contatti.
-- Micro-interazioni con GSAP, Lenis per smooth scrolling, animazioni delle barre competenze.
-- Modal per il CV con download diretto.
-- Tema dark/light con persistenza locale e navigazione mobile animata.
-- Contatto diretto via mailto e social links.
+## Routes
+- `/` home (academic profile)
+- `/publications/` publication list with filtering and BibTeX copy
+- `/cv/` print-optimized CV page with PDF download
 
-## 🛠️ Stack & librerie
-- HTML5 semantico
-- CSS3 custom (tipografia Space Grotesk + Inter)
-- JavaScript vanilla
-- [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger
-- [Lenis](https://github.com/studio-freight/lenis) per smooth scrolling
-- [Lucide Icons](https://lucide.dev)
+## Data sources
+- `data/publications.json`
+- `data/cv.json`
 
-## 📦 Struttura
-```
-/
-├── assets/
-│   └── Matteo-Ercolino-CV.pdf
-├── index.html
-├── script.js
-└── style.css
-```
-
-## 📄 Licenza
-Tutti i contenuti testuali e multimediali sono © Matteo Ercolino. Codice disponibile per uso personale previa citazione.
+## Stack
+- Semantic HTML
+- Vanilla CSS design system (`styles/main.css`)
+- Minimal vanilla JavaScript (`scripts/*.js`)

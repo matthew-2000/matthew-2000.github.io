@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Publication list for Matteo Ercolino with filters and BibTeX." />
+  <meta name="author" content="Matteo Ercolino" />
+  <title>Publications | Matteo Ercolino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script>
+    (() => {
+      const stored = localStorage.getItem('theme-preference');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (systemDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+    })();
+  </script>
+  <script defer src="../scripts/theme.js"></script>
+  <script defer src="../scripts/publications.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="site-title" href="/">Matteo Ercolino</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a aria-current="page" href="/publications/">Publications</a>
+        <a href="/cv/">CV</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-toggle-text">Theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content" class="container page-main" data-publications-source="../data/publications.json">
+    <section class="section-tight">
+      <p class="eyebrow">Research Output</p>
+      <h1>Publications</h1>
+      <p class="lead">Sorted by year (descending). Filter by publication type and expand entries for BibTeX.</p>
+    </section>
+
+    <section class="section" aria-labelledby="filter-title">
+      <h2 id="filter-title" class="sr-only">Filters</h2>
+      <div class="filter-row">
+        <label for="type-filter">Type</label>
+        <select id="type-filter" name="type-filter">
+          <option value="All">All</option>
+          <option value="Journal">Journal</option>
+          <option value="Conference">Conference</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Preprint">Preprint</option>
+          <option value="Thesis">Thesis</option>
+        </select>
+      </div>
+      <div id="publication-results" class="result-count" aria-live="polite"></div>
+      <ol id="publication-list" class="publication-list" aria-live="polite"></ol>
+    </section>
+  </main>
+</body>
+</html>

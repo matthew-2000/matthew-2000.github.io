@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Curriculum Vitae of Matteo Ercolino." />
+  <meta name="author" content="Matteo Ercolino" />
+  <title>CV | Matteo Ercolino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script>
+    (() => {
+      const stored = localStorage.getItem('theme-preference');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (systemDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+    })();
+  </script>
+  <script defer src="../scripts/theme.js"></script>
+  <script defer src="../scripts/cv.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header screen-only">
+    <div class="container nav-wrap">
+      <a class="site-title" href="/">Matteo Ercolino</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/publications/">Publications</a>
+        <a aria-current="page" href="/cv/">CV</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-toggle-text">Theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content" class="container page-main" data-cv-source="../data/cv.json" data-publications-source="../data/publications.json">
+    <section class="section-tight cv-header">
+      <div>
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h1>Matteo Ercolino</h1>
+        <p class="lead">PhD Student in Computer Science, University of Salerno</p>
+      </div>
+      <div class="cv-actions screen-only">
+        <a class="button-link" href="../assets/Matteo-Ercolino-CV.pdf" download>Download PDF</a>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <div id="cv-education" class="cv-entry-list"></div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="research-title">
+      <h2 id="research-title">Research</h2>
+      <div id="cv-research" class="cv-entry-list"></div>
+    </section>
+
+    <section id="cv-teaching-section" class="cv-section" aria-labelledby="teaching-title">
+      <h2 id="teaching-title">Teaching</h2>
+      <div id="cv-teaching" class="cv-entry-list"></div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="publications-title">
+      <h2 id="publications-title">Publications</h2>
+      <ol id="cv-publications" class="publication-list publication-list-compact"></ol>
+    </section>
+
+    <section class="cv-section" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <ul id="cv-skills" class="skill-inline-list"></ul>
+    </section>
+  </main>
+</body>
+</html>

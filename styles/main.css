@@ -1,0 +1,501 @@
+:root {
+  --container: 60rem;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+}
+
+:root[data-theme='light'] {
+  --bg: #f6f6f2;
+  --surface: #fcfcf8;
+  --text: #191c21;
+  --muted: #4e5560;
+  --border: #d8dce2;
+  --accent: #2559cc;
+  --accent-soft: #e8eefb;
+}
+
+:root[data-theme='dark'] {
+  --bg: #171b22;
+  --surface: #1d222c;
+  --text: #edf1f5;
+  --muted: #b2bbc7;
+  --border: #313947;
+  --accent: #92b3ff;
+  --accent-soft: rgba(146, 179, 255, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+}
+
+html.theme-ready,
+html.theme-ready * {
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, transform 160ms ease;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.12em;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: -100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+.container {
+  width: min(var(--container), calc(100% - 3rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.nav-wrap {
+  min-height: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.site-title {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.96rem;
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 0.4rem 0.72rem;
+  cursor: pointer;
+}
+
+.page-main {
+  padding-block: var(--space-6);
+}
+
+.section,
+.cv-section {
+  margin-top: var(--space-7);
+}
+
+.section-tight {
+  margin-top: var(--space-2);
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-1);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.95rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  margin-bottom: var(--space-4);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.07rem;
+  font-weight: 700;
+}
+
+p,
+ol,
+ul {
+  margin: 0;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.hero-role {
+  margin-top: var(--space-2);
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+
+.hero-affiliation {
+  margin-top: var(--space-1);
+  color: var(--muted);
+}
+
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: var(--space-4);
+  color: var(--muted);
+}
+
+.muted-inline {
+  color: var(--muted);
+}
+
+.focus-statement {
+  margin-top: var(--space-5);
+  max-width: 70ch;
+  font-size: 1.04rem;
+}
+
+.research-list {
+  border-top: 1px solid var(--border);
+}
+
+.research-list article {
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.research-list p {
+  margin-top: var(--space-2);
+  max-width: 74ch;
+}
+
+.section-head-inline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.section-link {
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.publication-list {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.publication-list li {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.publication-list-compact li {
+  padding: var(--space-3) 0;
+}
+
+.pub-authors,
+.pub-title,
+.pub-venue,
+.pub-links {
+  margin-top: var(--space-1);
+}
+
+.pub-authors {
+  color: var(--muted);
+}
+
+.pub-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pub-venue {
+  color: var(--muted);
+}
+
+.pub-links {
+  font-size: 0.95rem;
+}
+
+.author-self {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.filter-row label {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.filter-row select {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.5rem;
+}
+
+.result-count {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-bottom: var(--space-2);
+}
+
+.bibtex-block {
+  margin-top: var(--space-2);
+}
+
+.bibtex-block summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.bibtex-block pre {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.copy-bibtex,
+.button-link {
+  margin-top: var(--space-2);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.65rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.empty-state {
+  color: var(--muted);
+}
+
+.cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-4);
+}
+
+.cv-entry-list {
+  border-top: 1px solid var(--border);
+}
+
+.cv-entry {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-entry-meta,
+.cv-entry-org {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.cv-entry h3 {
+  margin-top: var(--space-1);
+}
+
+.cv-entry p:last-child {
+  margin-top: var(--space-2);
+}
+
+.skill-inline-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.skill-inline-list li {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0.3rem 0.72rem;
+  font-size: 0.92rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 860px) {
+  .container {
+    width: min(var(--container), calc(100% - 2rem));
+  }
+
+  .nav-wrap {
+    flex-wrap: wrap;
+    padding-block: var(--space-2);
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    gap: var(--space-3);
+  }
+
+  .cv-header {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready,
+  html.theme-ready * {
+    transition: none !important;
+  }
+}
+
+@page {
+  margin: 16mm;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 11pt;
+  }
+
+  .screen-only,
+  .skip-link,
+  #theme-toggle {
+    display: none !important;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .page-main {
+    padding: 0;
+  }
+
+  .section,
+  .cv-section {
+    margin-top: 1.2rem;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #111111 !important;
+    text-decoration: none;
+  }
+
+  .copy-bibtex,
+  .bibtex-block {
+    display: none !important;
+  }
+}

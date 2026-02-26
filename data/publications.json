@@ -1,0 +1,40 @@
+{
+  "nameToHighlight": "Matteo Ercolino",
+  "publications": [
+    {
+      "id": "tbd-preprint-2026",
+      "type": "Preprint",
+      "year": 2026,
+      "authors": ["Matteo Ercolino", "TBD: co-authors"],
+      "title": "TBD: preprint title",
+      "venue": "TBD: preprint server",
+      "links": [],
+      "bibtex": "@misc{ercolino2026tbd,\n  author = {Ercolino, Matteo and TBD},\n  title = {TBD: preprint title},\n  year = {2026},\n  note = {Preprint, details TBD}\n}"
+    },
+    {
+      "id": "ercolino-thesis-2025",
+      "type": "Thesis",
+      "year": 2025,
+      "authors": ["Matteo Ercolino"],
+      "title": "Adaptive virtual agents: study and design of conversational agents in Extended Reality",
+      "venue": "MSc Thesis, University of Salerno",
+      "links": [],
+      "bibtex": "@mastersthesis{ercolino2025adaptive,\n  author = {Ercolino, Matteo},\n  title = {Adaptive virtual agents: study and design of conversational agents in Extended Reality},\n  school = {University of Salerno},\n  year = {2025}\n}"
+    },
+    {
+      "id": "ercolino-chigreece-2023",
+      "type": "Conference",
+      "year": 2023,
+      "authors": ["Matteo Ercolino", "TBD: co-authors"],
+      "title": "Designing Virtual Interactive Objects to Enhance Visitors' Experience in Cultural Exhibits",
+      "venue": "ACM CHIGREECE 2023",
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3609987.3610110"
+        }
+      ],
+      "bibtex": "@inproceedings{ercolino2023virtual,\n  author = {Ercolino, Matteo and TBD},\n  title = {Designing Virtual Interactive Objects to Enhance Visitors' Experience in Cultural Exhibits},\n  booktitle = {ACM CHIGREECE},\n  year = {2023},\n  doi = {10.1145/3609987.3610110}\n}"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "education": [
+    {
+      "period": "2025-present",
+      "title": "PhD in Computer Science",
+      "organization": "University of Salerno",
+      "description": "Research project: AI-powered Digital Twins for Sustainable Urban Transformation."
+    },
+    {
+      "period": "2022-2025",
+      "title": "MSc in Computer Science",
+      "organization": "University of Salerno",
+      "description": "Final grade: 110/110 cum laude. Thesis: Adaptive virtual agents: study and design of conversational agents in Extended Reality."
+    },
+    {
+      "period": "2018-2022",
+      "title": "BSc in Computer Science",
+      "organization": "University of Salerno",
+      "description": "Final grade: 95/110. Thesis: Design and development of an augmented reality app for engaging users in cultural environments."
+    }
+  ],
+  "research": [
+    {
+      "period": "2023-present",
+      "title": "Research Collaboration",
+      "organization": "HCI-USE Lab",
+      "description": "Collaboration on extended reality and conversational agents, including prototyping, experimentation, and scientific output."
+    },
+    {
+      "period": "Aug 2025-present",
+      "title": "Web Developer - MediArSI (PRIN 2022)",
+      "organization": "DISPAC, University of Salerno",
+      "description": "Development of a responsive web application for geolocating and exploring art commissions in Southern Italy (11th-13th century)."
+    }
+  ],
+  "teaching": [
+    {
+      "period": "Nov 2024-Dec 2025",
+      "title": "Python Lecturer",
+      "organization": "UNINT Higher Education School, UNINT University",
+      "description": "Lecturer for Introduction to Python Programming and Python Programming for Cybersecurity, including course design and student support."
+    }
+  ],
+  "skills": [
+    "Python",
+    "JavaScript",
+    "Unity",
+    "Extended Reality (XR)",
+    "Conversational Agents",
+    "Web Application Development"
+  ]
+}

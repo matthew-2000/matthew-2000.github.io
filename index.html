@@ -1,565 +1,115 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" data-i18n="meta.description" content="Matteo Ercolino — Software Engineer specializzato in Mobile, Web ed Extended Reality. Scopri portfolio, progetti, pubblicazioni e contatti." />
-    <meta name="keywords" data-i18n="meta.keywords" content="Matteo Ercolino, Software Engineer, Mobile, Web, XR, Extended Reality, Portfolio" />
-    <meta name="author" content="Matteo Ercolino" />
-    <title data-i18n="meta.title">Matteo Ercolino — Software Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="https://fav.farm/🚀" />
-    <script defer src="https://unpkg.com/lucide@latest"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
-    <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Matteo Ercolino, PhD Student in Computer Science. Research profile, publications, and CV." />
+  <meta name="author" content="Matteo Ercolino" />
+  <title>Matteo Ercolino | PhD Student in Computer Science</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <script>
+    (() => {
+      const stored = localStorage.getItem('theme-preference');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (systemDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+    })();
+  </script>
+  <script defer src="scripts/theme.js"></script>
+  <script defer src="scripts/home.js"></script>
 </head>
-<body class="theme-dark">
-    <div class="global-bg" aria-hidden="true">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <div class="gradient-sphere sphere-one" aria-hidden="true"></div>
-        <div class="gradient-sphere sphere-two" aria-hidden="true"></div>
-        <div class="noise-overlay" aria-hidden="true"></div>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="site-title" href="/">Matteo Ercolino</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a aria-current="page" href="/">Home</a>
+        <a href="/publications/">Publications</a>
+        <a href="/cv/">CV</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-toggle-text">Theme</span>
+      </button>
     </div>
+  </header>
 
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <a class="brand" href="#hero">Matteo Ercolino</a>
-            <nav class="nav-links" aria-label="Primary navigation">
-                <a href="#about" data-i18n="nav.about">Chi sono</a>
-                <a href="#skills" data-i18n="nav.skills">Competenze</a>
-                <a href="#experience" data-i18n="nav.experience">Esperienze</a>
-                <a href="#education" data-i18n="nav.education">Formazione</a>
-                <a href="#publications" data-i18n="nav.publications">Pubblicazioni</a>
-                <a href="#languages" data-i18n="nav.languages">Lingue</a>
-                <a href="#projects" data-i18n="nav.projects">Progetti</a>
-                <a href="#contact" data-i18n="nav.contact">Contatti</a>
-            </nav>
-            <div class="nav-actions">
-                <div class="language-toggle" role="group" aria-label="Cambia lingua" data-i18n="nav.languageAria" data-i18n-attr="aria-label">
-                    <button class="lang-button active" type="button" data-lang="it" aria-pressed="true">
-                        <span aria-hidden="true">🇮🇹</span>
-                        <span class="sr-only" data-i18n="nav.languageItalian">Italiano</span>
-                    </button>
-                    <button class="lang-button" type="button" data-lang="en" aria-pressed="false">
-                        <span aria-hidden="true">🇬🇧</span>
-                        <span class="sr-only" data-i18n="nav.languageEnglish">Inglese</span>
-                    </button>
-                </div>
-                <button class="theme-toggle" aria-label="Cambia tema" data-i18n="nav.themeAria" data-i18n-attr="aria-label">
-                    <i data-lucide="moon-star"></i>
-                    <span data-i18n="nav.themeDark">Dark</span>
-                </button>
-                <button class="menu-toggle" aria-label="Apri il menu mobile" aria-expanded="false" data-i18n="nav.menuOpen" data-i18n-attr="aria-label">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
-        </div>
-        <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-            <a href="#about" data-i18n="nav.about">Chi sono</a>
-            <a href="#skills" data-i18n="nav.skills">Competenze</a>
-            <a href="#experience" data-i18n="nav.experience">Esperienze</a>
-            <a href="#education" data-i18n="nav.education">Formazione</a>
-            <a href="#publications" data-i18n="nav.publications">Pubblicazioni</a>
-            <a href="#languages" data-i18n="nav.languages">Lingue</a>
-            <a href="#projects" data-i18n="nav.projects">Progetti</a>
-            <a href="#extracurricular" data-i18n="nav.extracurricular">Attività</a>
-            <a href="#contact" data-i18n="nav.contact">Contatti</a>
-            <button class="cta-primary" data-open-cv data-i18n="nav.viewCv">Visualizza CV</button>
-        </div>
-    </header>
+  <main id="main-content" class="container page-main">
+    <section class="hero section-tight" aria-labelledby="hero-title">
+      <p class="eyebrow">Academic Profile</p>
+      <h1 id="hero-title">Matteo Ercolino</h1>
+      <p class="hero-role">PhD Student in Computer Science</p>
+      <p class="hero-affiliation">University of Salerno</p>
 
-    <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <div class="hero-meta">
-                    <span class="badge badge-glow" data-i18n="hero.badge">Disponibile per collaborazioni selezionate</span>
-                    <span class="divider"></span>
-                    <span class="location">
-                        <i data-lucide="map-pin"></i>
-                        <span data-i18n="hero.location">Salerno · Italia</span>
-                    </span>
-                </div>
-                <h1 class="hero-title">Matteo Ercolino</h1>
-                <p class="hero-role" data-i18n="hero.role">Software Engineer — Mobile • Web • XR</p>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">Costruisco esperienze digitali che uniscono tecnologia, creatività e interazione umana.</p>
-                <div class="hero-cta">
-                    <a class="cta-primary" href="assets/Matteo-Ercolino-CV.pdf" download data-i18n="hero.downloadCv">Download CV</a>
-                    <button class="cta-secondary" data-open-cv data-i18n="hero.previewCv">Preview CV</button>
-                    <a class="cta-tertiary" href="#projects" data-i18n="hero.exploreProjects">Esplora i miei progetti</a>
-                    <a class="cta-ghost" href="#contact" data-i18n="hero.contactMe">Contattami</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <p class="stat-number">6<span>+</span></p>
-                        <p class="stat-label" data-i18n="hero.statExperience">anni tra mobile e web</p>
-                    </div>
-                    <div class="stat">
-                        <p class="stat-number">3<span>+</span></p>
-                        <p class="stat-label" data-i18n="hero.statXr">anni in extended reality</p>
-                    </div>
-                    <div class="stat">
-                        <p class="stat-number">30k<span>+</span></p>
-                        <p class="stat-label" data-i18n="hero.statUsers">utenti raggiunti</p>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="card-header">
-                        <span class="pulse"></span>
-                        <p data-i18n="hero.cardTitle">Realtime Experience Designer</p>
-                    </div>
-                    <div class="card-body">
-                        <p class="quote" data-i18n="hero.cardQuote">“Tecnologia, empatia e narrazione si intrecciano per dare forma a prodotti memorabili.”</p>
-                        <ul class="focus-tags">
-                            <li data-i18n="hero.cardTagUx">Immersive UX</li>
-                            <li data-i18n="hero.cardTagSpatial">Spatial Computing</li>
-                            <li data-i18n="hero.cardTagAi">AI + XR</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="floating-widget">
-                    <i data-lucide="sparkles"></i>
-                    <div>
-                        <p class="title" data-i18n="hero.widgetDesignTitle">Design Systems</p>
-                        <p class="caption" data-i18n="hero.widgetDesignCaption">Workflow fluidi tra team cross-funzionali.</p>
-                    </div>
-                </div>
-                <div class="floating-widget secondary">
-                    <i data-lucide="vr"></i>
-                    <div>
-                        <p class="title" data-i18n="hero.widgetXrTitle">XR Innovation</p>
-                        <p class="caption" data-i18n="hero.widgetXrCaption">Prototipazione rapida di esperienze immersive.</p>
-                    </div>
-                </div>
-            </div>
-            <a href="#about" class="scroll-indicator" aria-label="Scorri verso il basso" data-i18n="hero.scrollAria" data-i18n-attr="aria-label">
-                <span data-i18n="hero.scroll">Scroll</span>
-                <div class="scroll-line"></div>
-            </a>
-        </section>
+      <p class="link-row" aria-label="Profile links">
+        <a href="mailto:matteo.ercolino01@gmail.com">Email</a>
+        <span aria-hidden="true">·</span>
+        <a href="/cv/">CV</a>
+        <span aria-hidden="true">·</span>
+        <span class="muted-inline">Scholar (TBD)</span>
+        <span aria-hidden="true">·</span>
+        <span class="muted-inline">ORCID (TBD)</span>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/matthew-2000" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
 
-        <section id="about" class="section about">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="about.kicker">Chi Sono</span>
-                <h2 data-i18n="about.title">Ricerca, usabilità ed esperienze immersive</h2>
-                <p data-i18n="about.subtitle">Un approccio olistico allo sviluppo: strategia, design dell'interazione e realizzazione tecnica.</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3 data-i18n="about.visionTitle">Visione</h3>
-                    <p data-i18n="about.visionText">Sviluppatore con esperienza 6+ anni tra mobile e web, 3+ anni in realtà estesa. Guardo oltre l’interfaccia, costruendo ecosistemi digitali coerenti.</p>
-                </div>
-                <div class="about-card">
-                    <h3 data-i18n="about.researchTitle">Ricerca & Teaching</h3>
-                    <p data-i18n="about.researchText">Forte orientamento alla ricerca, all’usabilità e alla progettazione di esperienze digitali immersive. Esperienza come docente universitario per corsi Python.</p>
-                </div>
-                <div class="about-card highlight">
-                    <h3 data-i18n="about.passionTitle">Passione</h3>
-                    <p data-i18n="about.passionText">Affascinato da tecnologie emergenti, interaction design e nuovi modelli di narrazione interattiva.</p>
-                </div>
-            </div>
-            <div class="about-footer">
-                <div class="about-pill">
-                    <i data-lucide="beaker"></i>
-                    <span data-i18n="about.pillResearch">Ricerca applicata</span>
-                </div>
-                <div class="about-pill">
-                    <i data-lucide="users"></i>
-                    <span data-i18n="about.pillUx">Design centrato sull'utente</span>
-                </div>
-                <div class="about-pill">
-                    <i data-lucide="workflow"></i>
-                    <span data-i18n="about.pillLeadership">Team leadership</span>
-                </div>
-                <button class="cta-outline" data-open-cv data-i18n="about.openCv">Apri il CV</button>
-            </div>
-        </section>
+      <p class="focus-statement">I study AI-powered digital twins and human-computer interaction in extended reality, with emphasis on adaptive conversational agents. Current work investigates how digital twin pipelines can support sustainable urban transformation tasks.</p>
+    </section>
 
-        <section id="skills" class="section skills">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="skills.kicker">Competenze</span>
-                <h2 data-i18n="skills.title">Stack completo per prodotti scalabili e immersivi</h2>
-                <p data-i18n="skills.subtitle">Dal concept alla delivery con un mix bilanciato di competenze tecniche e soft skills.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-block">
-                    <h3 data-i18n="skills.hardTitle">Hard Skills Core</h3>
-                    <div class="skill-matrix">
-                        <div class="skill-item" data-years="6+">
-                            <span data-i18n="skills.mobile">Mobile development</span>
-                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="6+">
-                            <span data-i18n="skills.web">Web development</span>
-                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="3+">
-                            <span data-i18n="skills.xr">Extended Reality</span>
-                            <div class="skill-bar"><span style="--value: 0.75"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="6+">
-                            <span data-i18n="skills.swift">Swift</span>
-                            <div class="skill-bar"><span style="--value: 0.9"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="7+">
-                            <span data-i18n="skills.java">Java</span>
-                            <div class="skill-bar"><span style="--value: 1"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="4+">
-                            <span data-i18n="skills.python">Python</span>
-                            <div class="skill-bar"><span style="--value: 0.8"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="3+">
-                            <span data-i18n="skills.csharp">C#</span>
-                            <div class="skill-bar"><span style="--value: 0.7"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="5+">
-                            <span data-i18n="skills.javascript">JavaScript</span>
-                            <div class="skill-bar"><span style="--value: 0.85"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="5+">
-                            <span data-i18n="skills.html">HTML / CSS</span>
-                            <div class="skill-bar"><span style="--value: 0.85"></span></div>
-                        </div>
-                        <div class="skill-item" data-years="7+">
-                            <span data-i18n="skills.c">C</span>
-                            <div class="skill-bar"><span style="--value: 0.95"></span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-block">
-                    <h3 data-i18n="skills.toolsTitle">Tecnologie</h3>
-                    <div class="tech-tags">
-                        <span data-i18n="skills.toolIntellij">IntelliJ IDEA</span>
-                        <span data-i18n="skills.toolXcode">Xcode</span>
-                        <span data-i18n="skills.toolUnity">Unity</span>
-                        <span data-i18n="skills.toolAndroidStudio">Android Studio</span>
-                        <span data-i18n="skills.toolMongo">MongoDB</span>
-                        <span data-i18n="skills.toolMysql">MySQL</span>
-                        <span data-i18n="skills.toolFirebase">Firebase</span>
-                        <span data-i18n="skills.toolFigma">Figma</span>
-                        <span data-i18n="skills.toolSlack">Slack</span>
-                        <span data-i18n="skills.toolDocker">Docker</span>
-                        <span data-i18n="skills.toolSonar">SonarCloud</span>
-                        <span data-i18n="skills.toolNode">NodeJS</span>
-                        <span data-i18n="skills.toolFlask">Flask</span>
-                        <span data-i18n="skills.toolOpenAI">OpenAI API</span>
-                    </div>
-                </div>
-                <div class="skill-block">
-                    <h3 data-i18n="skills.softTitle">Soft Skills</h3>
-                    <div class="soft-grid">
-                        <div class="soft-card">
-                            <i data-lucide="message-circle"></i>
-                            <span data-i18n="skills.softCommunication">Comunicazione</span>
-                        </div>
-                        <div class="soft-card">
-                            <i data-lucide="target"></i>
-                            <span data-i18n="skills.softLeadership">Leadership</span>
-                        </div>
-                        <div class="soft-card">
-                            <i data-lucide="calendar"></i>
-                            <span data-i18n="skills.softOrganization">Organizzazione</span>
-                        </div>
-                        <div class="soft-card">
-                            <i data-lucide="lightbulb"></i>
-                            <span data-i18n="skills.softProblemSolving">Problem Solving</span>
-                        </div>
-                        <div class="soft-card">
-                            <i data-lucide="handshake"></i>
-                            <span data-i18n="skills.softCollaboration">Collaborazione</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="section" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p>
+        PhD candidate in Computer Science at the University of Salerno (from 2025).
+        MSc in Computer Science (110/110 cum laude, 2025) and BSc in Computer Science (95/110, 2022), both from the University of Salerno.
+        Ongoing research collaboration with HCI-USE Lab on extended reality and conversational agents.
+        Current web development activity in the PRIN 2022 MediArSI project.
+      </p>
+    </section>
 
-        <section id="experience" class="section experience">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="experience.kicker">Esperienze</span>
-                <h2 data-i18n="experience.title">Impatto misurabile in progetti accademici e industriali</h2>
-                <p data-i18n="experience.subtitle">Timeline interattiva con outcome, tecnologie chiave e responsabilità.</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-track"></div>
-                <article class="timeline-card">
-                    <div class="timeline-meta">
-                        <span class="timeline-date" data-i18n="experience.item1.date">08/2025 — In corso</span>
-                        <span class="timeline-org" data-i18n="experience.item1.org">DISPAC · Università degli Studi di Salerno</span>
-                    </div>
-                    <h3 data-i18n="experience.item1.title">Sviluppatore Web — MediArSI</h3>
-                    <p data-i18n="experience.item1.text">Sviluppo di web application responsive per la geolocalizzazione e consultazione delle committenze artistiche nel Sud Italia (XI-XIII secolo), nell'ambito del progetto PRIN 2022 MediArSI.</p>
-                    <div class="timeline-tags">
-                        <span data-i18n="experience.item1.tag1">Web application</span>
-                        <span data-i18n="experience.item1.tag2">Geolocalizzazione</span>
-                        <span data-i18n="experience.item1.tag3">Responsive UX</span>
-                    </div>
-                </article>
-                <article class="timeline-card">
-                    <div class="timeline-meta">
-                        <span class="timeline-date" data-i18n="experience.item2.date">2023 — In corso</span>
-                        <span class="timeline-org" data-i18n="experience.item2.org">HCI-USE Lab</span>
-                    </div>
-                    <h3 data-i18n="experience.item2.title">Collaborazione accademica, pubblicazioni e ricerca</h3>
-                    <p data-i18n="experience.item2.text">Collaborazione continuativa con il laboratorio HCI-USE su Extended Reality e agenti conversazionali, con sviluppo di prototipi, sperimentazioni e produzione scientifica.</p>
-                    <div class="timeline-tags">
-                        <span data-i18n="experience.item2.tag1">Unity</span>
-                        <span data-i18n="experience.item2.tag2">UX Research</span>
-                        <span data-i18n="experience.item2.tag3">XR</span>
-                    </div>
-                </article>
-                <article class="timeline-card">
-                    <div class="timeline-meta">
-                        <span class="timeline-date" data-i18n="experience.item3.date">11/2024 — 12/2025</span>
-                        <span class="timeline-org" data-i18n="experience.item3.org">Scuola di Alta Formazione UNINT · Università UNINT</span>
-                    </div>
-                    <h3 data-i18n="experience.item3.title">Docente Python</h3>
-                    <p data-i18n="experience.item3.text">Docente dei corsi “Introduzione alla programmazione con Python” e “Python Programming for Cybersecurity (Ethical Hacking)”, con progettazione materiali didattici, esercitazioni e supporto agli studenti.</p>
-                    <div class="timeline-tags">
-                        <span data-i18n="experience.item3.tag1">Didattica</span>
-                        <span data-i18n="experience.item3.tag2">Python</span>
-                        <span data-i18n="experience.item3.tag3">Interactive Labs</span>
-                    </div>
-                </article>
-                <article class="timeline-card">
-                    <div class="timeline-meta">
-                        <span class="timeline-date" data-i18n="experience.item4.date">12/2023 — 10/2024</span>
-                        <span class="timeline-org" data-i18n="experience.item4.org">Fondazione Formit · UNINT</span>
-                    </div>
-                    <h3 data-i18n="experience.item4.title">Sviluppatore VR — CLASS</h3>
-                    <p data-i18n="experience.item4.text">Sviluppo dell'app VR CLASS, basata su Rational Emotive Behavior Therapy (REBT), per il potenziamento di abilità metacognitive tramite scenari immersivi e interazione guidata.</p>
-                    <div class="timeline-tags">
-                        <span data-i18n="experience.item4.tag1">Unity</span>
-                        <span data-i18n="experience.item4.tag2">Oculus SDK</span>
-                        <span data-i18n="experience.item4.tag3">XR Research</span>
-                    </div>
-                </article>
-            </div>
-        </section>
+    <section class="section" aria-labelledby="research-title">
+      <h2 id="research-title">Research</h2>
+      <div class="research-list">
+        <article>
+          <h3>AI-Powered Digital Twins</h3>
+          <p>
+            I investigate digital twin architectures for sustainable urban transformation scenarios.
+            The goal is to produce reliable computational support for analysis and decision workflows.
+          </p>
+        </article>
+        <article>
+          <h3>Extended Reality and Adaptive Agents</h3>
+          <p>
+            I study conversational and adaptive virtual agents in immersive environments.
+            This work addresses interaction design and evaluation for robust XR systems.
+          </p>
+        </article>
+        <article>
+          <h3>Digital Cultural Heritage Interfaces</h3>
+          <p>
+            I contribute to systems for geolocating and exploring historical art commissions in Southern Italy.
+            The technical focus is responsive data access for research and public-facing usage.
+          </p>
+        </article>
+      </div>
+    </section>
 
-        <section id="education" class="section education">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="education.kicker">Formazione</span>
-                <h2 data-i18n="education.title">Percorso accademico e ricerca</h2>
-            </div>
-            <div class="education-grid">
-                <article class="education-card">
-                    <span class="education-date" data-i18n="education.item0.date">2025 — In corso</span>
-                    <h3 data-i18n="education.item0.title">Dottorato di Ricerca in Informatica · Università di Salerno</h3>
-                    <p class="education-thesis" data-i18n="education.item0.thesis">Progetto di ricerca: “AI-powered Digital Twins for Sustainable Urban Transformation”.</p>
-                </article>
-                <article class="education-card">
-                    <span class="education-date" data-i18n="education.item1.date">2022 — 2025 · Laurea Magistrale in Informatica</span>
-                    <h3 data-i18n="education.item1.title">Università di Salerno · Curriculum Software Engineering & IT Management</h3>
-                    <p class="education-thesis" data-i18n="education.item1.thesis">Votazione 110/110 e lode. Tesi: “Agenti virtuali adattivi: studio e design di agenti conversazionali in Extended Reality”.</p>
-                </article>
-                <article class="education-card">
-                    <span class="education-date" data-i18n="education.item2.date">2018 — 2022 · Laurea Triennale in Informatica</span>
-                    <h3 data-i18n="education.item2.title">Università di Salerno</h3>
-                    <p class="education-thesis" data-i18n="education.item2.thesis">Votazione 95/110. Tesi: “Progettazione e sviluppo di un’applicazione in realtà aumentata per il coinvolgimento di utenti in ambienti culturali”.</p>
-                </article>
-            </div>
-        </section>
+    <section class="section" aria-labelledby="selected-publications-title">
+      <div class="section-head-inline">
+        <h2 id="selected-publications-title">Selected Publications</h2>
+        <a class="section-link" href="/publications/">All publications →</a>
+      </div>
+      <ol id="selected-publications" class="publication-list publication-list-compact" aria-live="polite"></ol>
+    </section>
 
-        <section id="publications" class="section publications">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="publications.kicker">Pubblicazioni</span>
-                <h2 data-i18n="publications.title">Disseminare conoscenza</h2>
-                <p data-i18n="publications.subtitle">Ricerca applicata alla user experience e alla realtà estesa.</p>
-            </div>
-            <div class="publication-card">
-                <div class="pub-meta">
-                    <span class="badge badge-outline" data-i18n="publications.badge">ACM CHIGREECE '23</span>
-                    <span class="pub-year" data-i18n="publications.year">2023</span>
-                </div>
-                <h3 data-i18n="publications.titlePaper">Designing Virtual Interactive Objects to Enhance Visitors’ Experience in Cultural Exhibits</h3>
-                <p data-i18n="publications.description">Studio e progettazione di oggetti interattivi virtuali per mostre culturali, con focus su engagement e narrazione.</p>
-                <a class="cta-link" href="https://doi.org/10.1145/3609987.3610110" target="_blank" rel="noopener" data-i18n="publications.cta">Leggi la pubblicazione</a>
-            </div>
-        </section>
-
-        <section id="languages" class="section education">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="languages.kicker">Lingue</span>
-                <h2 data-i18n="languages.title">Competenze linguistiche</h2>
-            </div>
-            <div class="education-grid">
-                <article class="education-card">
-                    <span class="education-date" data-i18n="languages.item1.level">English — B2</span>
-                    <p class="education-thesis" data-i18n="languages.item1.details">Reading: ottimo · Writing: ottimo · Speaking: buono.</p>
-                </article>
-                <article class="education-card">
-                    <span class="education-date" data-i18n="languages.item2.level">Italiano — Madrelingua</span>
-                    <p class="education-thesis" data-i18n="languages.item2.details">Competenza professionale completa.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="projects" class="section projects">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="projects.kicker">Progetti selezionati</span>
-                <h2 data-i18n="projects.title">Esperienze immersive e prodotti digitali real-world</h2>
-                <p data-i18n="projects.subtitle">Card animate con approfondimenti e link diretti.</p>
-            </div>
-            <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-visual project-class"></div>
-                    <div class="project-content">
-                        <span class="project-type" data-i18n="projects.class.type">XR · Meta Quest</span>
-                        <h3 data-i18n="projects.class.title">CLASS</h3>
-                        <p data-i18n="projects.class.text">Esperienza VR basata su REBT per supportare abilità metacognitive. Realizzata con Unity e Oculus SDK.</p>
-                        <div class="project-tags">
-                            <span data-i18n="projects.class.tag1">Unity</span>
-                            <span data-i18n="projects.class.tag2">Oculus SDK</span>
-                            <span data-i18n="projects.class.tag3">XR Research</span>
-                        </div>
-                        <a class="cta-link" href="https://www.meta.com/experiences/27531600243090916/" target="_blank" rel="noopener" data-i18n="projects.class.cta">Esplora l'esperienza</a>
-                    </div>
-                </article>
-                <article class="project-card">
-                    <div class="project-visual project-wakeapp"></div>
-                    <div class="project-content">
-                        <span class="project-type" data-i18n="projects.wakeapp.type">AI · Mobile · Flutter</span>
-                        <h3 data-i18n="projects.wakeapp.title">WakeApp</h3>
-                        <p data-i18n="projects.wakeapp.text">Supporto alle persone con depressione maggiore tramite AI e riconoscimento emozionale. Vincitore “Giuria Coach”.</p>
-                        <div class="project-tags">
-                            <span data-i18n="projects.wakeapp.tag1">Flutter</span>
-                            <span data-i18n="projects.wakeapp.tag2">Python</span>
-                            <span data-i18n="projects.wakeapp.tag3">AI</span>
-                        </div>
-                        <a class="cta-link" href="https://github.com/matthew-2000/WakeApp" target="_blank" rel="noopener" data-i18n="projects.wakeapp.cta">Apri il repository</a>
-                    </div>
-                </article>
-                <article class="project-card">
-                    <div class="project-visual project-campus"></div>
-                    <div class="project-content">
-                        <span class="project-type" data-i18n="projects.campus.type">Mobile · iOS & Android</span>
-                        <h3 data-i18n="projects.campus.title">CampUs Unisa</h3>
-                        <p data-i18n="projects.campus.text">App multipiattaforma per studenti universitari con oltre 30.000 download complessivi e oltre 1.000 utenti attivi quotidianamente.</p>
-                        <div class="project-tags">
-                            <span data-i18n="projects.campus.tag1">Swift</span>
-                            <span data-i18n="projects.campus.tag2">Kotlin</span>
-                            <span data-i18n="projects.campus.tag3">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.silvered.campus" target="_blank" rel="noopener" data-i18n="projects.campus.android">Android</a>
-                            <a class="cta-link" href="https://apps.apple.com/it/app/campus-unisa/id1519983095" target="_blank" rel="noopener" data-i18n="projects.campus.ios">iOS</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="extracurricular" class="section education">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="extracurricular.kicker">Attività extracurriculari</span>
-                <h2 data-i18n="extracurricular.title">Esperienze oltre il lavoro</h2>
-            </div>
-            <div class="education-grid">
-                <article class="education-card">
-                    <span class="education-date" data-i18n="extracurricular.item1.date">2018 — 2020</span>
-                    <h3 data-i18n="extracurricular.item1.title">Servizio Civile Nazionale · Comune di Monteforte Irpino (AV)</h3>
-                    <p class="education-thesis" data-i18n="extracurricular.item1.text">Collaboratore nel progetto “Noi giovani risorse per Monteforte” a supporto dell'organizzazione di eventi culturali e sociali.</p>
-                </article>
-                <article class="education-card">
-                    <span class="education-date" data-i18n="extracurricular.item2.date">Musica</span>
-                    <h3 data-i18n="extracurricular.item2.title">Bassista in band pop/rock</h3>
-                    <p class="education-thesis" data-i18n="extracurricular.item2.text">Suono il basso elettrico in una band pop/rock con esibizioni live in provincia di Avellino; ho inciso un album di cover rock a Napoli con una band locale.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="contact" class="section contact">
-            <div class="section-heading">
-                <span class="section-kicker" data-i18n="contact.kicker">Contatti</span>
-                <h2 data-i18n="contact.title">Costruiamo il prossimo progetto</h2>
-                <p data-i18n="contact.subtitle">Scrivimi per collaborazioni, consulenze o talk.</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <i data-lucide="mail"></i>
-                        <a href="mailto:matteo.ercolino01@gmail.com" data-i18n="contact.email">matteo.ercolino01@gmail.com</a>
-                    </div>
-                    <div class="contact-card">
-                        <i data-lucide="github"></i>
-                        <a href="https://github.com/matthew-2000" target="_blank" rel="noopener" data-i18n="contact.github">github.com/matthew-2000</a>
-                    </div>
-                    <div class="contact-card">
-                        <i data-lucide="linkedin"></i>
-                        <a href="https://linkedin.com/in/matteo-ercolino-b40054211/" target="_blank" rel="noopener" data-i18n="contact.linkedin">linkedin.com/in/matteo-ercolino</a>
-                    </div>
-                    <div class="contact-card">
-                        <i data-lucide="phone"></i>
-                        <a href="tel:+393517706576" data-i18n="contact.phone">+39 351 770 6576</a>
-                    </div>
-                    <div class="contact-cta">
-                        <span data-i18n="contact.meeting">Calendario meeting su richiesta</span>
-                        <a class="cta-outline" href="mailto:matteo.ercolino01@gmail.com" data-i18n="contact.bookCall">Prenota una call</a>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm" novalidate>
-                    <div class="form-group">
-                        <label for="name" data-i18n="contact.form.nameLabel">Nome</label>
-                        <input type="text" id="name" name="name" placeholder="Il tuo nome" required data-i18n="contact.form.namePlaceholder" data-i18n-attr="placeholder" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email" data-i18n="contact.form.emailLabel">Email</label>
-                        <input type="email" id="email" name="email" placeholder="nome@email.com" required data-i18n="contact.form.emailPlaceholder" data-i18n-attr="placeholder" />
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-i18n="contact.form.messageLabel">Messaggio</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Raccontami la tua idea" required data-i18n="contact.form.messagePlaceholder" data-i18n-attr="placeholder"></textarea>
-                    </div>
-                    <button type="submit" class="cta-primary" data-i18n="contact.form.submit">Invia messaggio</button>
-                    <p class="form-feedback" role="status" aria-live="polite" data-i18n="contact.form.feedback"></p>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-inner">
-            <p data-i18n="footer.copy">&copy; <span id="year"></span> Matteo Ercolino. Crafted with passione, design e codice.</p>
-            <div class="footer-links">
-                <a href="#hero" data-i18n="footer.backToTop">Torna su</a>
-                <a href="#projects" data-i18n="footer.projects">Progetti</a>
-                <a href="#contact" data-i18n="footer.contact">Contatti</a>
-            </div>
-        </div>
-    </footer>
-
-    <dialog id="cvModal" class="modal" aria-labelledby="cvModalTitle">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="cvModalTitle" data-i18n="modal.title">Curriculum Vitae</h2>
-                <button class="modal-close" data-close-cv aria-label="Chiudi la modale" data-i18n="modal.closeAria" data-i18n-attr="aria-label">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <section>
-                    <h3 data-i18n="modal.profileTitle">Profilo</h3>
-                    <p data-i18n="modal.profileText">Software Engineer specializzato in Mobile, Web e Extended Reality, con esperienza in ricerca accademica, didattica e sviluppo prodotto.</p>
-                </section>
-                <section>
-                    <h3 data-i18n="modal.summaryTitle">Versione completa</h3>
-                    <p data-i18n="modal.summaryText">Per dettagli completi su esperienza, formazione, pubblicazioni e progetti, scarica il CV PDF aggiornato.</p>
-                </section>
-                <div class="modal-actions">
-                    <a class="cta-primary" href="assets/Matteo-Ercolino-CV.pdf" download data-i18n="modal.download">Scarica PDF</a>
-                    <button class="cta-outline" data-close-cv data-i18n="modal.close">Chiudi</button>
-                </div>
-            </div>
-        </div>
-    </dialog>
+    <section class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p><a href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a></p>
+    </section>
+  </main>
 </body>
 </html>
