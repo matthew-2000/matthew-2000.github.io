@@ -49,6 +49,16 @@
           .join(' · ');
 
         const detailsId = 'bibtex-' + index;
+        const hasBibtex = typeof item.bibtex === 'string' && item.bibtex.trim().length > 0;
+        const bibtexBlock = hasBibtex
+          ? [
+              '<details class="bibtex-block">',
+              '<summary>BibTeX</summary>',
+              '<pre id="' + detailsId + '">' + escapeHtml(item.bibtex) + '</pre>',
+              '<button class="copy-bibtex" type="button" data-target="' + detailsId + '">Copy</button>',
+              '</details>'
+            ].join('')
+          : '';
 
         return [
           '<li class="pub-item">',
@@ -56,11 +66,7 @@
           '<p class="pub-title">' + escapeHtml(item.title) + '.</p>',
           '<p class="pub-venue">' + escapeHtml(item.venue) + ' · ' + escapeHtml(item.type) + '.</p>',
           links ? '<p class="pub-links">' + links + '</p>' : '',
-          '<details class="bibtex-block">',
-          '<summary>BibTeX</summary>',
-          '<pre id="' + detailsId + '">' + escapeHtml(item.bibtex || 'TBD: BibTeX entry') + '</pre>',
-          '<button class="copy-bibtex" type="button" data-target="' + detailsId + '">Copy</button>',
-          '</details>',
+          bibtexBlock,
           '</li>'
         ].join('');
       })

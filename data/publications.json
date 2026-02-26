@@ -2,24 +2,18 @@
   "nameToHighlight": "Matteo Ercolino",
   "publications": [
     {
-      "id": "tbd-preprint-2026",
-      "type": "Preprint",
-      "year": 2026,
-      "authors": ["Matteo Ercolino", "TBD: co-authors"],
-      "title": "TBD: preprint title",
-      "venue": "TBD: preprint server",
-      "links": [],
-      "bibtex": "@misc{ercolino2026tbd,\n  author = {Ercolino, Matteo and TBD},\n  title = {TBD: preprint title},\n  year = {2026},\n  note = {Preprint, details TBD}\n}"
-    },
-    {
       "id": "ercolino-thesis-2025",
       "type": "Thesis",
       "year": 2025,
       "authors": ["Matteo Ercolino"],
       "title": "Adaptive virtual agents: study and design of conversational agents in Extended Reality",
       "venue": "MSc Thesis, University of Salerno",
-      "links": [],
-      "bibtex": "@mastersthesis{ercolino2025adaptive,\n  author = {Ercolino, Matteo},\n  title = {Adaptive virtual agents: study and design of conversational agents in Extended Reality},\n  school = {University of Salerno},\n  year = {2025}\n}"
+      "links": [
+        {
+          "label": "PDF",
+          "url": "/assets/Tesi_Ercolino_Matteo.pdf"
+        }
+      ]
     },
     {
       "id": "ercolino-chigreece-2023",
