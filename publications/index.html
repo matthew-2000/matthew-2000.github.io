@@ -12,17 +12,25 @@
   <link rel="stylesheet" href="../styles/main.css" />
   <script>
     (() => {
-      const stored = localStorage.getItem('theme-preference');
+      let stored = null;
+      try {
+        stored = localStorage.getItem('theme-preference');
+      } catch (error) {
+        stored = null;
+      }
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = stored || (systemDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.style.colorScheme = theme;
     })();
   </script>
+  <script defer src="../scripts/motion.js"></script>
   <script defer src="../scripts/theme.js"></script>
+  <script defer src="../scripts/page-transitions.js"></script>
+  <script defer src="../scripts/toast.js"></script>
   <script defer src="../scripts/publications.js"></script>
 </head>
-<body>
+<body data-page="publications">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -34,6 +42,7 @@
         <a href="/cv/">CV</a>
       </nav>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-toggle-icon" aria-hidden="true"></span>
         <span class="theme-toggle-text">Theme</span>
       </button>
     </div>

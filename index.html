@@ -12,17 +12,25 @@
   <link rel="stylesheet" href="styles/main.css" />
   <script>
     (() => {
-      const stored = localStorage.getItem('theme-preference');
+      let stored = null;
+      try {
+        stored = localStorage.getItem('theme-preference');
+      } catch (error) {
+        stored = null;
+      }
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = stored || (systemDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.style.colorScheme = theme;
     })();
   </script>
+  <script defer src="scripts/motion.js"></script>
   <script defer src="scripts/theme.js"></script>
+  <script defer src="scripts/page-transitions.js"></script>
+  <script defer src="scripts/reveal.js"></script>
   <script defer src="scripts/home.js"></script>
 </head>
-<body>
+<body data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -34,19 +42,20 @@
         <a href="/cv/">CV</a>
       </nav>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-toggle-icon" aria-hidden="true"></span>
         <span class="theme-toggle-text">Theme</span>
       </button>
     </div>
   </header>
 
   <main id="main-content" class="container page-main">
-    <section class="hero section-tight" aria-labelledby="hero-title">
-      <p class="eyebrow">Academic Profile</p>
-      <h1 id="hero-title">Matteo Ercolino</h1>
-      <p class="hero-role">PhD Student in Computer Science</p>
-      <p class="hero-affiliation">University of Salerno</p>
+    <section class="hero section-tight" aria-labelledby="hero-title" data-reveal>
+      <p class="eyebrow" data-reveal-child>Academic Profile</p>
+      <h1 id="hero-title" data-reveal-child>Matteo Ercolino</h1>
+      <p class="hero-role" data-reveal-child>PhD Student in Computer Science</p>
+      <p class="hero-affiliation" data-reveal-child>University of Salerno</p>
 
-      <p class="link-row" aria-label="Profile links">
+      <p class="link-row" aria-label="Profile links" data-reveal-child>
         <a href="mailto:matteo.ercolino01@gmail.com">Email</a>
         <span aria-hidden="true">·</span>
         <a href="/cv/">CV</a>
@@ -58,12 +67,12 @@
         <a href="https://github.com/matthew-2000" target="_blank" rel="noopener noreferrer">GitHub</a>
       </p>
 
-      <p class="focus-statement">I study AI-powered digital twins and human-computer interaction in extended reality, with emphasis on adaptive conversational agents. Current work investigates how digital twin pipelines can support sustainable urban transformation tasks.</p>
+      <p class="focus-statement" data-reveal-child>I study AI-powered digital twins and human-computer interaction in extended reality, with emphasis on adaptive conversational agents. Current work investigates how digital twin pipelines can support sustainable urban transformation tasks.</p>
     </section>
 
-    <section class="section" aria-labelledby="about-title">
-      <h2 id="about-title">About</h2>
-      <p>
+    <section class="section" aria-labelledby="about-title" data-reveal>
+      <h2 id="about-title" data-reveal-child>About</h2>
+      <p data-reveal-child>
         PhD candidate in Computer Science at the University of Salerno (from 2025).
         MSc in Computer Science (110/110 cum laude, 2025) and BSc in Computer Science (95/110, 2022), both from the University of Salerno.
         Ongoing research collaboration with HCI-USE Lab on extended reality and conversational agents.
@@ -71,9 +80,9 @@
       </p>
     </section>
 
-    <section class="section" aria-labelledby="research-title">
-      <h2 id="research-title">Research</h2>
-      <div class="research-list">
+    <section class="section" aria-labelledby="research-title" data-reveal>
+      <h2 id="research-title" data-reveal-child>Research</h2>
+      <div class="research-list" data-reveal-child>
         <article>
           <h3>AI-Powered Digital Twins</h3>
           <p>
@@ -98,17 +107,17 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="selected-publications-title">
-      <div class="section-head-inline">
+    <section class="section" aria-labelledby="selected-publications-title" data-reveal>
+      <div class="section-head-inline" data-reveal-child>
         <h2 id="selected-publications-title">Selected Publications</h2>
         <a class="section-link" href="/publications/">All publications →</a>
       </div>
-      <ol id="selected-publications" class="publication-list publication-list-compact" aria-live="polite"></ol>
+      <ol id="selected-publications" class="publication-list publication-list-compact" aria-live="polite" data-reveal-child></ol>
     </section>
 
-    <section class="section" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <p><a href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a></p>
+    <section class="section" aria-labelledby="contact-title" data-reveal>
+      <h2 id="contact-title" data-reveal-child>Contact</h2>
+      <p data-reveal-child><a href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a></p>
     </section>
   </main>
 </body>
