@@ -16,15 +16,17 @@
       accordion: 190,
       toast: 140,
       theme: 180,
-      palette: 160
+      palette: 160,
+      story: 200
     }),
     distance: Object.freeze({
       route: 8,
       reveal: 10,
-      palette: 8
+      palette: 8,
+      story: 10
     }),
     hero: Object.freeze({
-      compactRange: 160,
+      compactRange: 170,
       titleMax: 3.5,
       titleMin: 2.5
     }),
@@ -77,9 +79,11 @@
     root.style.setProperty('--motion-duration-toast', tokens.duration.toast + 'ms');
     root.style.setProperty('--motion-duration-theme', tokens.duration.theme + 'ms');
     root.style.setProperty('--motion-duration-palette', tokens.duration.palette + 'ms');
+    root.style.setProperty('--motion-duration-story', tokens.duration.story + 'ms');
     root.style.setProperty('--motion-distance-route', tokens.distance.route + 'px');
     root.style.setProperty('--motion-distance-reveal', tokens.distance.reveal + 'px');
     root.style.setProperty('--motion-distance-palette', tokens.distance.palette + 'px');
+    root.style.setProperty('--motion-distance-story', tokens.distance.story + 'px');
     root.style.setProperty('--motion-ease-standard', tokens.easing.standard);
     root.style.setProperty('--motion-ease-gentle', tokens.easing.gentle);
     root.style.setProperty('--hero-compact-range', tokens.hero.compactRange + 'px');

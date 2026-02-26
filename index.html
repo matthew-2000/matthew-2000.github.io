@@ -28,6 +28,7 @@
   <script defer src="scripts/theme.js"></script>
   <script defer src="scripts/page-transitions.js"></script>
   <script defer src="scripts/hero-compact.js"></script>
+  <script defer src="scripts/research-story.js"></script>
   <script defer src="scripts/reveal.js"></script>
   <script defer src="scripts/home.js"></script>
 </head>
@@ -48,6 +49,8 @@
       </button>
     </div>
   </header>
+
+  <div id="hero-compact-sentinel" aria-hidden="true"></div>
 
   <main id="main-content" class="container page-main">
     <section class="hero section-tight" aria-labelledby="hero-title" data-reveal>
@@ -82,30 +85,16 @@
       </p>
     </section>
 
-    <section class="section" aria-labelledby="research-title" data-reveal>
-      <h2 id="research-title" data-reveal-child>Research</h2>
-      <div class="research-list" data-reveal-child>
-        <article>
-          <h3>AI-Powered Digital Twins</h3>
-          <p>
-            I investigate digital twin architectures for sustainable urban transformation scenarios.
-            The goal is to produce reliable computational support for analysis and decision workflows.
-          </p>
-        </article>
-        <article>
-          <h3>Extended Reality and Adaptive Agents</h3>
-          <p>
-            I study conversational and adaptive virtual agents in immersive environments.
-            This work addresses interaction design and evaluation for robust XR systems.
-          </p>
-        </article>
-        <article>
-          <h3>Digital Cultural Heritage Interfaces</h3>
-          <p>
-            I contribute to systems for geolocating and exploring historical art commissions in Southern Italy.
-            The technical focus is responsive data access for research and public-facing usage.
-          </p>
-        </article>
+    <section
+      class="section research-story-section"
+      aria-labelledby="research-title"
+      data-reveal
+      data-research-story-source="data/research-story.json"
+    >
+      <h2 id="research-title" data-reveal-child>Research Story</h2>
+      <div class="research-story" data-reveal-child>
+        <ol class="research-story-indicator" aria-label="Research story steps" data-research-indicator></ol>
+        <div class="research-story-track" data-research-track></div>
       </div>
     </section>
 

@@ -1,0 +1,16 @@
+{
+  "areas": [
+    {
+      "title": "AI-Powered Digital Twins",
+      "text": "I investigate digital twin architectures for sustainable urban transformation scenarios. The goal is to produce reliable computational support for analysis and decision workflows."
+    },
+    {
+      "title": "Extended Reality and Adaptive Agents",
+      "text": "I study conversational and adaptive virtual agents in immersive environments. This work addresses interaction design and evaluation for robust XR systems."
+    },
+    {
+      "title": "Digital Cultural Heritage Interfaces",
+      "text": "I contribute to systems for geolocating and exploring historical art commissions in Southern Italy. The technical focus is responsive data access for research and public-facing usage."
+    }
+  ]
+}

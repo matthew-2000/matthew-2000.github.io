@@ -6,47 +6,55 @@
   const body = document.body;
   const root = document.documentElement;
   const motion = window.SiteMotion;
+  const sentinel = document.getElementById('hero-compact-sentinel');
+  const supportsScrollDriven = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
 
-  if (!body || body.getAttribute('data-page') !== 'home' || !motion) {
+  if (!body || body.getAttribute('data-page') !== 'home' || !motion || !sentinel) {
     return;
   }
 
-  const compactRange = motion.tokens && motion.tokens.hero ? motion.tokens.hero.compactRange : 160;
-  let ticking = false;
+  const compactRange = motion.tokens && motion.tokens.hero ? motion.tokens.hero.compactRange : 170;
+  let observer = null;
 
-  function setProgress() {
-    const scrollY = window.scrollY || window.pageYOffset || 0;
+  function applyState(isCompact) {
+    const reducedMotion = motion.useReducedMotion();
+    const useDiscreteState = reducedMotion || !supportsScrollDriven;
 
-    if (motion.useReducedMotion()) {
-      const isCompact = scrollY >= compactRange;
+    if (useDiscreteState) {
       root.style.setProperty('--hero-progress', isCompact ? '1' : '0');
-      body.classList.toggle('is-hero-compact', isCompact);
-      return;
+    } else {
+      root.style.setProperty('--hero-progress', '0');
     }
 
-    const progress = Math.max(0, Math.min(scrollY / compactRange, 1));
-    root.style.setProperty('--hero-progress', progress.toFixed(3));
-    body.classList.toggle('is-hero-compact', progress >= 0.82);
+    body.classList.toggle('is-hero-compact', isCompact);
   }
 
-  function requestTick() {
-    if (ticking) {
-      return;
+  function bindObserver() {
+    if (observer) {
+      observer.disconnect();
+      observer = null;
     }
 
-    ticking = true;
-    window.requestAnimationFrame(function onFrame() {
-      setProgress();
-      ticking = false;
-    });
+    observer = new IntersectionObserver(
+      function onIntersect(entries) {
+        const entry = entries[0];
+        applyState(entry ? !entry.isIntersecting : false);
+      },
+      {
+        threshold: 0
+      }
+    );
+
+    observer.observe(sentinel);
   }
 
-  window.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('resize', requestTick);
+  sentinel.style.height = compactRange + 'px';
+  bindObserver();
+  window.addEventListener('resize', bindObserver);
 
   if (typeof motion.onReducedMotionChange === 'function') {
-    motion.onReducedMotionChange(requestTick);
+    motion.onReducedMotionChange(function onReducedMotionChanged() {
+      bindObserver();
+    });
   }
-
-  setProgress();
 })();
