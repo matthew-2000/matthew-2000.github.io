@@ -8,7 +8,7 @@
   <title>CV | Matteo Ercolino</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles/main.css" />
   <script>
     (() => {
@@ -47,9 +47,9 @@
     </div>
   </header>
 
-  <main id="main-content" class="container page-main" data-cv-source="../data/cv.json" data-publications-source="../data/publications.json">
+  <main id="main-content" class="container page-main page-subpage" data-cv-source="../data/cv.json" data-publications-source="../data/publications.json">
     <section class="section-tight cv-header">
-      <div>
+      <div class="page-intro-copy">
         <p class="eyebrow">Curriculum Vitae</p>
         <h1>Matteo Ercolino</h1>
         <p class="lead">PhD Student in Computer Science, University of Salerno</p>
@@ -59,30 +59,67 @@
       </div>
     </section>
 
+    <section class="section cv-overview-grid">
+      <article class="fact-card">
+        <span class="fact-label">Education path</span>
+        <p>PhD candidate with MSc in Computer Science (110/110 cum laude) and BSc in Computer Science.</p>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Research line</span>
+        <p>AI-powered digital twins, extended reality, conversational and adaptive virtual agents.</p>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Current work</span>
+        <p>HCI-USE Lab collaboration and web development activity in the PRIN 2022 MediArSI project.</p>
+      </article>
+    </section>
+
     <section class="cv-section" aria-labelledby="education-title">
-      <h2 id="education-title">Education</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Academic Formation</p>
+        <h2 id="education-title">Education</h2>
+      </div>
       <div id="cv-education" class="cv-entry-list"></div>
     </section>
 
     <section class="cv-section" aria-labelledby="research-title">
-      <h2 id="research-title">Research</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Research Activity</p>
+        <h2 id="research-title">Research</h2>
+      </div>
       <div id="cv-research" class="cv-entry-list"></div>
     </section>
 
     <section id="cv-teaching-section" class="cv-section" aria-labelledby="teaching-title">
-      <h2 id="teaching-title">Teaching</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Teaching Activity</p>
+        <h2 id="teaching-title">Teaching</h2>
+      </div>
       <div id="cv-teaching" class="cv-entry-list"></div>
     </section>
 
     <section class="cv-section" aria-labelledby="publications-title">
-      <h2 id="publications-title">Publications</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Selected Record</p>
+        <h2 id="publications-title">Publications</h2>
+      </div>
       <ol id="cv-publications" class="publication-list publication-list-compact"></ol>
     </section>
 
     <section class="cv-section" aria-labelledby="skills-title">
-      <h2 id="skills-title">Skills</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Tooling</p>
+        <h2 id="skills-title">Skills</h2>
+      </div>
       <ul id="cv-skills" class="skill-inline-list"></ul>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <p>Matteo Ercolino</p>
+      <p>Curriculum Vitae and supporting academic record</p>
+    </div>
+  </footer>
 </body>
 </html>

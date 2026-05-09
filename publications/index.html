@@ -8,7 +8,7 @@
   <title>Publications | Matteo Ercolino</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles/main.css" />
   <script>
     (() => {
@@ -48,28 +48,42 @@
     </div>
   </header>
 
-  <main id="main-content" class="container page-main" data-publications-source="../data/publications.json">
-    <section class="section-tight">
-      <p class="eyebrow">Research Output</p>
-      <h1>Publications</h1>
-      <p class="lead">Sorted by year (descending). Filter by type with detailed metadata.</p>
+  <main id="main-content" class="container page-main page-subpage" data-publications-source="../data/publications.json">
+    <section class="section-tight page-intro">
+      <div class="page-intro-copy">
+        <p class="eyebrow">Research Output</p>
+        <h1>Publications</h1>
+        <p class="lead">Sorted by year in descending order, with detailed metadata, links, and BibTeX where available.</p>
+      </div>
+      <div class="page-intro-note panel">
+        <p>Use the filter to focus on publication type while keeping the full record accessible in a single reading surface.</p>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="filter-title">
-      <h2 id="filter-title" class="sr-only">Filters</h2>
-      <div class="filter-row">
-        <label for="type-filter">Type</label>
-        <select id="type-filter" name="type-filter">
-          <option value="All">All</option>
-          <option value="Journal">Journal</option>
-          <option value="Conference">Conference</option>
-          <option value="Workshop">Workshop</option>
-          <option value="Thesis">Thesis</option>
-        </select>
+      <div class="panel control-panel">
+        <h2 id="filter-title" class="sr-only">Filters</h2>
+        <div class="filter-row">
+          <label for="type-filter">Type</label>
+          <select id="type-filter" name="type-filter">
+            <option value="All">All</option>
+            <option value="Journal">Journal</option>
+            <option value="Conference">Conference</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Thesis">Thesis</option>
+          </select>
+        </div>
+        <div id="publication-results" class="result-count" aria-live="polite"></div>
       </div>
-      <div id="publication-results" class="result-count" aria-live="polite"></div>
-      <ol id="publication-list" class="publication-list" aria-live="polite"></ol>
+      <ol id="publication-list" class="publication-list publication-list-detailed" aria-live="polite"></ol>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <p>Matteo Ercolino</p>
+      <p>Publication archive and academic references</p>
+    </div>
+  </footer>
 </body>
 </html>
