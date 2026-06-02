@@ -11,6 +11,7 @@ export default defineConfig({
         home: resolve(rootDir, "index.html"),
         publications: resolve(rootDir, "publications/index.html"),
         cv: resolve(rootDir, "cv/index.html"),
+        forumGiovani: resolve(rootDir, "forum-giovani/index.html"),
       },
     },
   },
