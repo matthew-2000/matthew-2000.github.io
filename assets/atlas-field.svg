@@ -1,0 +1,40 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" fill="#F4EFE6"/>
+  <g opacity="0.22" stroke="#18191D" stroke-width="1">
+    <path d="M0 180H1600"/>
+    <path d="M0 420H1600"/>
+    <path d="M0 660H1600"/>
+    <path d="M0 900H1600"/>
+    <path d="M240 0V1200"/>
+    <path d="M520 0V1200"/>
+    <path d="M800 0V1200"/>
+    <path d="M1080 0V1200"/>
+    <path d="M1360 0V1200"/>
+  </g>
+  <g opacity="0.8">
+    <path d="M295 224C387 249 468 312 531 389C590 461 626 558 628 663C631 752 594 836 523 901C447 970 349 1002 232 996" stroke="#1D1E22" stroke-width="2"/>
+    <path d="M346 186C432 231 513 311 576 417C642 528 669 640 651 754C634 860 583 944 497 1011" stroke="#8C8A86" stroke-width="1.2"/>
+    <path d="M467 158C550 220 633 306 702 430C773 559 794 696 764 841" stroke="#B7B1A8" stroke-width="1.2"/>
+    <path d="M600 171C688 253 753 342 806 450C865 570 877 700 848 821C816 952 749 1031 647 1088" stroke="#1D1E22" stroke-width="1.2"/>
+    <path d="M735 205C818 297 882 389 932 515C985 651 988 785 941 917C892 1055 791 1115 671 1143" stroke="#B7B1A8" stroke-width="1.2"/>
+    <path d="M899 216C990 296 1059 386 1105 503C1144 606 1147 723 1113 835C1077 953 1005 1043 898 1111" stroke="#1D1E22" stroke-width="1.2"/>
+    <path d="M1020 195C1096 242 1165 321 1218 433C1270 545 1282 665 1250 793C1220 910 1159 1002 1068 1068" stroke="#B7B1A8" stroke-width="1.2"/>
+    <path d="M251 832C344 770 437 728 533 707C662 679 792 689 925 734C1033 771 1139 840 1247 945" stroke="#1D1E22" stroke-width="1.4"/>
+    <path d="M287 755C366 710 446 676 529 658C650 633 773 639 891 676C996 709 1105 771 1218 865" stroke="#B7B1A8" stroke-width="1"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M1049 352L1148 451L1020 583L914 478L1049 352Z" stroke="#3557D6" stroke-width="4"/>
+    <path d="M980 506H1208" stroke="#3557D6" stroke-width="2"/>
+    <path d="M1094 392V648" stroke="#3557D6" stroke-width="2"/>
+    <circle cx="1094" cy="518" r="16" stroke="#3557D6" stroke-width="4"/>
+    <circle cx="1094" cy="518" r="6" fill="#3557D6"/>
+  </g>
+  <g opacity="0.55" stroke="#18191D" stroke-width="1">
+    <path d="M1134 138V326"/>
+    <path d="M1248 230H938"/>
+    <path d="M1314 140V846"/>
+    <path d="M877 782H1459"/>
+    <path d="M332 1128L1560 142"/>
+    <path d="M198 180L1268 1158"/>
+  </g>
+</svg>

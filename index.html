@@ -1,182 +1,217 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Matteo Ercolino, PhD Student in Computer Science. Research profile, publications, and CV." />
+  <meta
+    name="description"
+    content="Matteo Ercolino is a PhD student in Computer Science researching AI-powered digital twins, XR interaction, and adaptive conversational agents."
+  />
   <meta name="author" content="Matteo Ercolino" />
   <title>Matteo Ercolino | PhD Student in Computer Science</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/main.css" />
-  <script>
-    (() => {
-      let stored = null;
-      try {
-        stored = localStorage.getItem('theme-preference');
-      } catch (error) {
-        stored = null;
-      }
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored || (systemDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.style.colorScheme = theme;
-    })();
-  </script>
-  <script defer src="scripts/motion.js"></script>
-  <script defer src="scripts/theme.js"></script>
-  <script defer src="scripts/page-transitions.js"></script>
-  <script defer src="scripts/hero-compact.js"></script>
-  <script defer src="scripts/research-story.js"></script>
-  <script defer src="scripts/reveal.js"></script>
-  <script defer src="scripts/home.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script type="module" src="/scripts/site.js"></script>
+  <script type="module" src="/scripts/home.js"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="site-title" href="/">Matteo Ercolino</a>
-      <nav class="site-nav" aria-label="Primary">
-        <a aria-current="page" href="/">Home</a>
-        <a href="/publications/">Publications</a>
-        <a href="/cv/">CV</a>
-      </nav>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
-        <span class="theme-toggle-icon" aria-hidden="true"></span>
-        <span class="theme-toggle-text">Theme</span>
-      </button>
-    </div>
-  </header>
+  <div class="site-frame">
+    <header class="site-header">
+      <div class="shell site-header-inner">
+        <a class="brand" href="/" aria-label="Matteo Ercolino home">
+          <span class="brand-mark">ME</span>
+          <span class="brand-name">Matteo Ercolino</span>
+        </a>
 
-  <div id="hero-compact-sentinel" aria-hidden="true"></div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+        </button>
 
-  <main id="main-content" class="container page-main page-home">
-    <section class="hero hero-shell section-tight" aria-labelledby="hero-title" data-reveal>
-      <div class="hero-grid">
+        <nav class="site-nav" id="site-navigation" aria-label="Primary">
+          <a aria-current="page" href="/">Home</a>
+          <a href="/publications/">Publications</a>
+          <a href="/cv/">CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="page page-home">
+      <section class="hero shell section-grid" data-reveal>
         <div class="hero-copy">
-          <h1 id="hero-title" data-reveal-child>Matteo Ercolino</h1>
-          <div class="hero-meta" data-reveal-child>
-            <p class="hero-role">PhD Student in Computer Science</p>
-            <p class="hero-affiliation">University of Salerno</p>
-          </div>
-          <p class="focus-statement" data-reveal-child>
-            I study AI-powered digital twins and human-computer interaction in extended reality, with emphasis on adaptive conversational agents. Current work investigates how digital twin pipelines can support sustainable urban transformation tasks.
+          <p class="hero-role" data-reveal-child>PhD Student in Computer Science</p>
+          <h1 data-reveal-child>Matteo Ercolino</h1>
+          <p class="hero-affiliation" data-reveal-child>University of Salerno</p>
+          <p class="hero-summary" data-reveal-child>
+            I design and study intelligent systems that connect people, places, and data, with
+            current work spanning AI-powered digital twins, HCI in XR, and adaptive conversational
+            agents for sustainable urban transformation.
           </p>
+
           <div class="hero-actions" data-reveal-child>
-            <a class="button-link" href="/publications/">Explore publications</a>
-            <a class="button-link button-link-secondary" href="/cv/">Open CV</a>
+            <a class="button button-primary" href="/publications/">Explore publications</a>
+            <a class="button button-secondary" href="/cv/">View CV</a>
           </div>
-          <p class="link-row profile-links" aria-label="Profile links" data-reveal-child>
-            <a href="mailto:matteo.ercolino01@gmail.com">Email</a>
-            <a href="/cv/">CV</a>
-            <a href="https://scholar.google.com/citations?user=AOpT8RgAAAAJ" target="_blank" rel="noopener noreferrer">Scholar</a>
+
+          <div class="hero-links" aria-label="Profile links" data-reveal-child>
+            <span>Connect</span>
+            <a href="https://scholar.google.com/citations?user=AOpT8RgAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
             <a href="https://orcid.org/0009-0000-0594-6151" target="_blank" rel="noopener noreferrer">ORCID</a>
             <a href="https://github.com/matthew-2000" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </p>
+            <a href="mailto:matteo.ercolino01@gmail.com">Email</a>
+          </div>
         </div>
 
-        <aside class="hero-aside" data-reveal-child>
-          <div class="panel feature-panel">
-            <p class="panel-label">Current roles</p>
-            <div class="feature-stack">
-              <article class="feature-item">
-                <span class="feature-kicker">2025-present</span>
-                <h2>PhD in Computer Science</h2>
-                <p>Research project: AI-powered Digital Twins for Sustainable Urban Transformation.</p>
-              </article>
-              <article class="feature-item">
-                <span class="feature-kicker">Ongoing collaboration</span>
-                <h2>HCI-USE Lab</h2>
-                <p>Extended reality and conversational agents, including prototyping, experimentation, and scientific output.</p>
-              </article>
-              <article class="feature-item">
-                <span class="feature-kicker">Current development activity</span>
-                <h2>MediArSI (PRIN 2022)</h2>
-                <p>Responsive web application work for geolocating and exploring historical art commissions in Southern Italy.</p>
-              </article>
+        <div class="hero-visual" data-reveal-child>
+          <div class="hero-map">
+            <img src="/assets/atlas-field.svg" alt="" />
+            <div class="hero-grid-note">
+              <span class="hero-grid-note-label">Research coordinates</span>
+              <p>AI-powered digital twins, XR interaction, adaptive conversational agents.</p>
             </div>
           </div>
-        </aside>
-      </div>
-    </section>
 
-    <section class="section section-split" aria-labelledby="about-title" data-reveal>
-      <div class="section-heading" data-reveal-child>
-        <p class="eyebrow">Profile</p>
-        <h2 id="about-title">About</h2>
-      </div>
-      <div class="split-layout" data-reveal-child>
-        <div class="panel narrative-panel">
+          <ol class="hero-role-list" aria-label="Current roles">
+            <li>
+              <span class="hero-role-period">2025-present</span>
+              <div>
+                <h2>PhD in Computer Science</h2>
+                <p>Research project: AI-powered Digital Twins for Sustainable Urban Transformation.</p>
+              </div>
+            </li>
+            <li>
+              <span class="hero-role-period">Ongoing collaboration</span>
+              <div>
+                <h2>HCI-USE Lab</h2>
+                <p>Extended reality and conversational agents, including prototyping, experimentation, and scientific output.</p>
+              </div>
+            </li>
+            <li>
+              <span class="hero-role-period">Current development activity</span>
+              <div>
+                <h2>MediArSI (PRIN 2022)</h2>
+                <p>Responsive web application work for geolocating and exploring historical art commissions in Southern Italy.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="signal-band">
+        <div class="shell signal-band-inner">
+          <div>
+            <p class="signal-band-title">Research at the intersection of AI, XR, and urban systems.</p>
+            <p class="signal-band-meta">40.6319 N, 14.7697 E</p>
+          </div>
+          <img src="/assets/signal-field.svg" alt="" />
+        </div>
+      </section>
+
+      <section class="section shell about-grid" data-reveal>
+        <div class="section-lead" data-reveal-child>
+          <p class="section-tag">About</p>
+          <h2>A technical profile shaped by research, prototyping, and systems design.</h2>
+        </div>
+
+        <div class="about-body" data-reveal-child>
           <p>
-            PhD candidate in Computer Science at the University of Salerno (from 2025). MSc in Computer Science (110/110 cum laude, 2025) and BSc in Computer Science (95/110, 2022), both from the University of Salerno. Ongoing research collaboration with HCI-USE Lab on extended reality and conversational agents. Current web development activity in the PRIN 2022 MediArSI project.
+            PhD candidate in Computer Science at the University of Salerno (from 2025). MSc in
+            Computer Science (110/110 cum laude, 2025) and BSc in Computer Science (95/110, 2022),
+            both from the University of Salerno. Ongoing research collaboration with HCI-USE Lab on
+            extended reality and conversational agents. Current web development activity in the PRIN
+            2022 MediArSI project.
+          </p>
+
+          <dl class="about-facts">
+            <div>
+              <dt>Education</dt>
+              <dd>PhD candidate, MSc 110/110 cum laude, BSc 95/110.</dd>
+            </div>
+            <div>
+              <dt>Research</dt>
+              <dd>AI-powered digital twins, XR interaction, adaptive conversational agents.</dd>
+            </div>
+            <div>
+              <dt>Collaboration</dt>
+              <dd>HCI-USE Lab and MediArSI project work at the University of Salerno.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section shell research-section" data-reveal>
+        <div class="section-heading-row" data-reveal-child>
+          <div>
+            <p class="section-tag">Research Story</p>
+            <h2>Three connected lines of work define the current profile.</h2>
+          </div>
+          <p class="section-intro">
+            Computational support for urban transformation, interaction design for XR systems, and
+            digital interfaces for cultural heritage access.
           </p>
         </div>
-        <div class="fact-grid">
-          <article class="fact-card">
-            <span class="fact-label">Education</span>
-            <p>PhD candidate, MSc 110/110 cum laude, BSc 95/110.</p>
-          </article>
-          <article class="fact-card">
-            <span class="fact-label">Research</span>
-            <p>AI-powered digital twins, XR interaction, adaptive conversational agents.</p>
-          </article>
-          <article class="fact-card">
-            <span class="fact-label">Collaboration</span>
-            <p>HCI-USE Lab and MediArSI project work at the University of Salerno.</p>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section
-      class="section research-story-section"
-      aria-labelledby="research-title"
-      data-reveal
-      data-research-story-source="data/research-story.json"
-    >
-      <div class="section-heading section-heading-wide" data-reveal-child>
-        <div>
-          <p class="eyebrow">Focus Areas</p>
-          <h2 id="research-title">Research Story</h2>
+        <div
+          class="research-layout"
+          data-research-story-source="/data/research-story.json"
+          data-reveal-child
+        >
+          <ol class="research-nav" aria-label="Research areas" data-research-nav></ol>
+          <div class="research-stage" data-research-stage></div>
         </div>
-        <p class="section-intro">Three connected lines of work define the current profile: computational support for urban transformation, interaction design for XR systems, and digital interfaces for cultural heritage access.</p>
-      </div>
-      <div class="research-story" data-reveal-child>
-        <ol class="research-story-indicator" aria-label="Research story steps" data-research-indicator></ol>
-        <div class="research-story-track" data-research-track></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" aria-labelledby="selected-publications-title" data-reveal>
-      <div class="section-head-inline" data-reveal-child>
-        <div class="section-heading-inline-copy">
-          <p class="eyebrow">Writing</p>
-          <h2 id="selected-publications-title">Selected Publications</h2>
+      <section class="section shell publications-preview" data-reveal>
+        <div class="section-heading-row publications-heading" data-reveal-child>
+          <div>
+            <p class="section-tag">Selected Publications</p>
+            <h2>Recent writing and academic output.</h2>
+          </div>
+          <a class="text-link" href="/publications/">View all publications</a>
         </div>
-        <a class="section-link" href="/publications/">All publications</a>
-      </div>
-      <ol id="selected-publications" class="publication-list publication-list-compact" aria-live="polite" data-reveal-child></ol>
-    </section>
 
-    <section class="section" aria-labelledby="contact-title" data-reveal>
-      <div class="contact-panel" data-reveal-child>
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2 id="contact-title">Get in touch</h2>
-          <p class="lead">For research collaborations, academic exchange, or project work, the primary point of contact is email.</p>
+        <ol
+          id="selected-publications"
+          class="selected-publications-list"
+          aria-live="polite"
+          data-reveal-child
+        ></ol>
+      </section>
+
+      <section class="contact-strip">
+        <div class="shell contact-strip-inner">
+          <div>
+            <p class="section-tag">Get in touch</p>
+            <h2>Open to research collaborations, academic exchange, and project work.</h2>
+          </div>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a>
+            <p>University of Salerno</p>
+          </div>
         </div>
-        <a class="button-link" href="mailto:matteo.ercolino01@gmail.com">matteo.ercolino01@gmail.com</a>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <p>Matteo Ercolino</p>
-      <p>PhD Student in Computer Science · University of Salerno</p>
-    </div>
-  </footer>
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <p>Matteo Ercolino</p>
+        <p>PhD Student in Computer Science · University of Salerno</p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,118 +8,142 @@
   <title>CV | Matteo Ercolino</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles/main.css" />
-  <script>
-    (() => {
-      let stored = null;
-      try {
-        stored = localStorage.getItem('theme-preference');
-      } catch (error) {
-        stored = null;
-      }
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored || (systemDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.style.colorScheme = theme;
-    })();
-  </script>
-  <script defer src="../scripts/motion.js"></script>
-  <script defer src="../scripts/theme.js"></script>
-  <script defer src="../scripts/page-transitions.js"></script>
-  <script defer src="../scripts/cv.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script type="module" src="/scripts/site.js"></script>
+  <script type="module" src="/scripts/cv.js"></script>
 </head>
 <body data-page="cv">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header screen-only">
-    <div class="container nav-wrap">
-      <a class="site-title" href="/">Matteo Ercolino</a>
-      <nav class="site-nav" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/publications/">Publications</a>
-        <a aria-current="page" href="/cv/">CV</a>
-      </nav>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
-        <span class="theme-toggle-icon" aria-hidden="true"></span>
-        <span class="theme-toggle-text">Theme</span>
-      </button>
-    </div>
-  </header>
+  <div class="site-frame">
+    <header class="site-header">
+      <div class="shell site-header-inner">
+        <a class="brand" href="/" aria-label="Matteo Ercolino home">
+          <span class="brand-mark">ME</span>
+          <span class="brand-name">Matteo Ercolino</span>
+        </a>
 
-  <main id="main-content" class="container page-main page-subpage" data-cv-source="../data/cv.json" data-publications-source="../data/publications.json">
-    <section class="section-tight cv-header">
-      <div class="page-intro-copy">
-        <p class="eyebrow">Curriculum Vitae</p>
-        <h1>Matteo Ercolino</h1>
-        <p class="lead">PhD Student in Computer Science, University of Salerno</p>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="site-navigation" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/publications/">Publications</a>
+          <a aria-current="page" href="/cv/">CV</a>
+        </nav>
       </div>
-      <div class="cv-actions screen-only">
-        <a class="button-link" href="../assets/Matteo-Ercolino-CV.pdf" download>Download PDF</a>
+    </header>
+
+    <main
+      id="main-content"
+      class="page page-cv shell"
+      data-cv-source="/data/cv.json"
+      data-publications-source="/data/publications.json"
+    >
+      <section class="page-hero page-hero-cv" data-reveal>
+        <div class="page-hero-copy" data-reveal-child>
+          <p class="section-tag">Curriculum Vitae</p>
+          <h1>Matteo Ercolino</h1>
+          <p class="hero-role">PhD Student in Computer Science</p>
+          <p class="hero-affiliation">University of Salerno</p>
+        </div>
+
+        <div class="cv-hero-actions" data-reveal-child>
+          <a class="button button-primary" href="/assets/Matteo-Ercolino-CV.pdf" download>Download CV</a>
+          <p>Academic record, ongoing research activity, and supporting publications.</p>
+        </div>
+      </section>
+
+      <section class="cv-layout section" data-reveal>
+        <aside class="cv-summary-rail" data-reveal-child>
+          <div class="cv-summary-panel">
+            <p class="section-tag">Overview</p>
+            <p>
+              PhD candidate with MSc in Computer Science (110/110 cum laude) and BSc in Computer
+              Science. Research work spans digital twins, XR, and conversational systems.
+            </p>
+          </div>
+
+          <div class="cv-summary-panel">
+            <p class="section-tag">Current work</p>
+            <p>HCI-USE Lab collaboration and web development activity in the PRIN 2022 MediArSI project.</p>
+          </div>
+
+          <div class="cv-summary-panel">
+            <p class="section-tag">Navigation</p>
+            <ul class="cv-anchor-list">
+              <li><a href="#education">Education</a></li>
+              <li><a href="#research">Research</a></li>
+              <li><a href="#teaching">Teaching</a></li>
+              <li><a href="#publications">Publications</a></li>
+              <li><a href="#skills">Skills</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="cv-document" data-reveal-child>
+          <section class="cv-section" id="education" aria-labelledby="education-title">
+            <div class="cv-section-head">
+              <p class="section-tag">Education</p>
+              <h2 id="education-title">Education</h2>
+            </div>
+            <div id="cv-education" class="cv-entry-list"></div>
+          </section>
+
+          <section class="cv-section" id="research" aria-labelledby="research-title">
+            <div class="cv-section-head">
+              <p class="section-tag">Research</p>
+              <h2 id="research-title">Research</h2>
+            </div>
+            <div id="cv-research" class="cv-entry-list"></div>
+          </section>
+
+          <section class="cv-section" id="teaching" aria-labelledby="teaching-title">
+            <div class="cv-section-head">
+              <p class="section-tag">Teaching</p>
+              <h2 id="teaching-title">Teaching</h2>
+            </div>
+            <div id="cv-teaching" class="cv-entry-list"></div>
+          </section>
+
+          <section class="cv-section" id="publications" aria-labelledby="publications-title">
+            <div class="cv-section-head">
+              <p class="section-tag">Publications</p>
+              <h2 id="publications-title">Selected record</h2>
+            </div>
+            <ol id="cv-publications" class="cv-publication-list"></ol>
+          </section>
+
+          <section class="cv-section" id="skills" aria-labelledby="skills-title">
+            <div class="cv-section-head">
+              <p class="section-tag">Skills</p>
+              <h2 id="skills-title">Skills</h2>
+            </div>
+            <ul id="cv-skills" class="cv-skills-list"></ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <p>Matteo Ercolino</p>
+        <p>Curriculum Vitae and academic record</p>
       </div>
-    </section>
-
-    <section class="section cv-overview-grid">
-      <article class="fact-card">
-        <span class="fact-label">Education path</span>
-        <p>PhD candidate with MSc in Computer Science (110/110 cum laude) and BSc in Computer Science.</p>
-      </article>
-      <article class="fact-card">
-        <span class="fact-label">Research line</span>
-        <p>AI-powered digital twins, extended reality, conversational and adaptive virtual agents.</p>
-      </article>
-      <article class="fact-card">
-        <span class="fact-label">Current work</span>
-        <p>HCI-USE Lab collaboration and web development activity in the PRIN 2022 MediArSI project.</p>
-      </article>
-    </section>
-
-    <section class="cv-section" aria-labelledby="education-title">
-      <div class="section-heading">
-        <p class="eyebrow">Academic Formation</p>
-        <h2 id="education-title">Education</h2>
-      </div>
-      <div id="cv-education" class="cv-entry-list"></div>
-    </section>
-
-    <section class="cv-section" aria-labelledby="research-title">
-      <div class="section-heading">
-        <p class="eyebrow">Research Activity</p>
-        <h2 id="research-title">Research</h2>
-      </div>
-      <div id="cv-research" class="cv-entry-list"></div>
-    </section>
-
-    <section id="cv-teaching-section" class="cv-section" aria-labelledby="teaching-title">
-      <div class="section-heading">
-        <p class="eyebrow">Teaching Activity</p>
-        <h2 id="teaching-title">Teaching</h2>
-      </div>
-      <div id="cv-teaching" class="cv-entry-list"></div>
-    </section>
-
-    <section class="cv-section" aria-labelledby="publications-title">
-      <div class="section-heading">
-        <p class="eyebrow">Selected Record</p>
-        <h2 id="publications-title">Publications</h2>
-      </div>
-      <ol id="cv-publications" class="publication-list publication-list-compact"></ol>
-    </section>
-
-    <section class="cv-section" aria-labelledby="skills-title">
-      <div class="section-heading">
-        <p class="eyebrow">Tooling</p>
-        <h2 id="skills-title">Skills</h2>
-      </div>
-      <ul id="cv-skills" class="skill-inline-list"></ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <p>Matteo Ercolino</p>
-      <p>Curriculum Vitae and supporting academic record</p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 </body>
 </html>

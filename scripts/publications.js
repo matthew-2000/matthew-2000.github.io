@@ -1,237 +1,128 @@
 (function initPublicationsPage() {
-  const main = document.querySelector('main[data-publications-source]');
-  const filter = document.getElementById('type-filter');
-  const list = document.getElementById('publication-list');
-  const results = document.getElementById('publication-results');
-  const motion = window.SiteMotion;
-
-  if (!main || !filter || !list || !results) {
+  if (document.body.getAttribute("data-page") !== "publications") {
     return;
   }
 
-  const source = main.getAttribute('data-publications-source');
-  const initialUrl = new URL(window.location.href);
+  const main = document.querySelector("main[data-publications-source]");
+  const typeFilter = document.getElementById("type-filter");
+  const searchFilter = document.getElementById("search-filter");
+  const listRoot = document.getElementById("publication-list");
+  const resultsRoot = document.getElementById("publication-results");
 
-  let allItems = [];
-  let highlightName = '';
-  let searchQuery = (initialUrl.searchParams.get('q') || '').trim();
-
-  function prefersReducedMotion() {
-    if (motion && typeof motion.useReducedMotion === 'function') {
-      return motion.useReducedMotion();
-    }
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!main || !typeFilter || !searchFilter || !listRoot || !resultsRoot) {
+    return;
   }
+
+  const source = main.getAttribute("data-publications-source");
+  const currentUrl = new URL(window.location.href);
+  let allItems = [];
+  let highlightedName = "";
+
+  searchFilter.value = (currentUrl.searchParams.get("q") || "").trim();
 
   function escapeHtml(value) {
     return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function formatAuthors(authors) {
-    return authors
+    return (authors || [])
       .map(function mapAuthor(author) {
-        if (author.trim().toLowerCase() === highlightName.trim().toLowerCase()) {
-          return '<strong class="author-self">' + escapeHtml(author) + '</strong>';
+        if (author.trim().toLowerCase() === highlightedName.trim().toLowerCase()) {
+          return "<strong>" + escapeHtml(author) + "</strong>";
         }
         return escapeHtml(author);
       })
-      .join(', ');
+      .join(", ");
   }
 
-  function renderAccordionItem(idPrefix, index, label, contentHtml) {
-    const triggerId = idPrefix + '-trigger-' + index;
-    const panelId = idPrefix + '-panel-' + index;
-
-    return [
-      '<div class="accordion-item">',
-      '<button id="' + triggerId + '" class="accordion-trigger" type="button" aria-expanded="false" aria-controls="' + panelId + '">',
-      escapeHtml(label),
-      '</button>',
-      '<div id="' + panelId + '" class="accordion-panel" role="region" aria-labelledby="' + triggerId + '" hidden>',
-      '<div class="accordion-panel-inner">',
-      contentHtml,
-      '</div>',
-      '</div>',
-      '</div>'
-    ].join('');
-  }
-
-  function renderDetailedExtras(item, index) {
-    const links = (item.links || [])
-      .map(function renderLink(link) {
-        return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(link.label) + '</a>';
-      })
-      .join(' · ');
-
-    const hasAbstract = typeof item.abstract === 'string' && item.abstract.trim().length > 0;
-    const hasBibtex = typeof item.bibtex === 'string' && item.bibtex.trim().length > 0;
-
-    const accordionItems = [];
-    if (hasAbstract) {
-      accordionItems.push(
-        renderAccordionItem(
-          'abstract-' + index,
-          index,
-          'Abstract',
-          '<p class="accordion-content">' + escapeHtml(item.abstract) + '</p>'
-        )
-      );
+  function updateUrl(query) {
+    if (query) {
+      currentUrl.searchParams.set("q", query);
+    } else {
+      currentUrl.searchParams.delete("q");
     }
-
-    if (hasBibtex) {
-      const bibtexCodeId = 'bibtex-code-' + index;
-      accordionItems.push(
-        renderAccordionItem(
-          'bibtex-' + index,
-          index,
-          'BibTeX',
-          [
-            '<pre id="' + bibtexCodeId + '">' + escapeHtml(item.bibtex) + '</pre>',
-            '<button class="copy-bibtex" type="button" data-target="' + bibtexCodeId + '">Copy</button>'
-          ].join('')
-        )
-      );
-    }
-
-    const accordionBlock = accordionItems.length
-      ? '<div class="pub-accordion">' + accordionItems.join('') + '</div>'
-      : '';
-
-    return [
-      links ? '<p class="pub-links">' + links + '</p>' : '',
-      accordionBlock
-    ].join('');
+    window.history.replaceState({}, "", currentUrl);
   }
 
   function render(items) {
-    results.textContent = items.length + ' publication' + (items.length === 1 ? '' : 's');
-    list.classList.remove('is-mode-compact');
-    list.classList.add('is-mode-detailed');
+    resultsRoot.textContent = items.length + " result" + (items.length === 1 ? "" : "s");
 
     if (!items.length) {
-      list.innerHTML = '<li class="empty-state">No publications for this filter.</li>';
+      listRoot.innerHTML = '<li class="empty-state">No publications match the current filter.</li>';
       return;
     }
 
-    list.innerHTML = items
-      .map(function renderItem(item, index) {
+    listRoot.innerHTML = items
+      .map(function renderPublication(item, index) {
+        const detailId = "publication-detail-" + index;
+        const links = (item.links || [])
+          .map(function renderLink(link) {
+            return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(link.label) + "</a>";
+          })
+          .join("");
+
+        const abstractBlock =
+          typeof item.abstract === "string" && item.abstract.trim()
+            ? "<p>" + escapeHtml(item.abstract) + "</p>"
+            : "";
+
+        const bibtexBlock =
+          typeof item.bibtex === "string" && item.bibtex.trim()
+            ? [
+                '<div class="detail-row">',
+                '<button class="detail-copy" type="button" data-copy="' + detailId + '-bibtex">Copy BibTeX</button>',
+                "</div>",
+                '<pre class="detail-pre" id="' + detailId + '-bibtex">' + escapeHtml(item.bibtex) + "</pre>",
+              ].join("")
+            : "";
+
+        const hasDetails = abstractBlock || bibtexBlock;
+
         return [
-          '<li class="pub-item">',
-          '<p class="pub-authors">' + formatAuthors(item.authors || []) + ' (' + escapeHtml(item.year) + ').</p>',
-          '<p class="pub-title">' + escapeHtml(item.title) + '.</p>',
-          '<p class="pub-venue">' + escapeHtml(item.venue) + ' · ' + escapeHtml(item.type) + '.</p>',
-          renderDetailedExtras(item, index),
-          '</li>'
-        ].join('');
+          '<li class="publication-record">',
+          '<div class="publication-record-index">',
+          "<strong>" + String(index + 1).padStart(2, "0") + "</strong>",
+          "<span>" + escapeHtml(item.year || "") + "</span>",
+          "</div>",
+          '<div class="publication-record-body">',
+          "<h2>" + escapeHtml(item.title) + "</h2>",
+          '<p class="publication-authors">' + formatAuthors(item.authors || []) + "</p>",
+          '<p class="publication-venue">' + escapeHtml(item.venue || "") + " · " + escapeHtml(item.type || "") + "</p>",
+          '<div class="detail-row">',
+          links ? '<div class="publication-links">' + links + "</div>" : "",
+          hasDetails
+            ? [
+                '<button class="detail-toggle" type="button" aria-expanded="false" aria-controls="' + detailId + '">',
+                '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+                "Details",
+                "</button>",
+              ].join("")
+            : "",
+          "</div>",
+          hasDetails
+            ? '<div class="detail-panel" id="' + detailId + '" hidden>' + abstractBlock + bibtexBlock + "</div>"
+            : "",
+          "</div>",
+          "</li>",
+        ].join("");
       })
-      .join('');
+      .join("");
   }
 
-  function clearPanelListener(panel) {
-    if (panel._accordionTransitionEnd) {
-      panel.removeEventListener('transitionend', panel._accordionTransitionEnd);
-      panel._accordionTransitionEnd = null;
-    }
-  }
+  function applyFilters() {
+    const selectedType = typeFilter.value;
+    const query = searchFilter.value.trim().toLowerCase();
 
-  function openPanel(trigger, panel) {
-    trigger.setAttribute('aria-expanded', 'true');
-
-    if (prefersReducedMotion()) {
-      panel.hidden = false;
-      panel.style.height = 'auto';
-      panel.style.opacity = '1';
-      return;
-    }
-
-    clearPanelListener(panel);
-
-    panel.hidden = false;
-    panel.style.overflow = 'hidden';
-    panel.style.height = '0px';
-    panel.style.opacity = '0';
-
-    requestAnimationFrame(function animateOpen() {
-      panel.style.height = panel.scrollHeight + 'px';
-      panel.style.opacity = '1';
-    });
-
-    panel._accordionTransitionEnd = function onOpenTransitionEnd(event) {
-      if (event.propertyName !== 'height') {
-        return;
-      }
-      panel.style.height = 'auto';
-      panel.style.overflow = 'visible';
-      clearPanelListener(panel);
-    };
-
-    panel.addEventListener('transitionend', panel._accordionTransitionEnd);
-  }
-
-  function closePanel(trigger, panel) {
-    trigger.setAttribute('aria-expanded', 'false');
-
-    if (prefersReducedMotion()) {
-      panel.hidden = true;
-      panel.style.height = '0px';
-      panel.style.opacity = '0';
-      return;
-    }
-
-    clearPanelListener(panel);
-
-    panel.style.overflow = 'hidden';
-    panel.style.height = panel.scrollHeight + 'px';
-    panel.style.opacity = '1';
-
-    requestAnimationFrame(function animateClose() {
-      panel.style.height = '0px';
-      panel.style.opacity = '0';
-    });
-
-    panel._accordionTransitionEnd = function onCloseTransitionEnd(event) {
-      if (event.propertyName !== 'height') {
-        return;
-      }
-      panel.hidden = true;
-      panel.style.overflow = 'hidden';
-      clearPanelListener(panel);
-    };
-
-    panel.addEventListener('transitionend', panel._accordionTransitionEnd);
-  }
-
-  function toggleAccordion(trigger) {
-    const panelId = trigger.getAttribute('aria-controls');
-    const panel = panelId ? document.getElementById(panelId) : null;
-
-    if (!panel) {
-      return;
-    }
-
-    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-    if (isExpanded) {
-      closePanel(trigger, panel);
-    } else {
-      openPanel(trigger, panel);
-    }
-  }
-
-  function normalizedSearch() {
-    return searchQuery.trim().toLowerCase();
-  }
-
-  function applyFilter() {
-    const type = filter.value;
-    const query = normalizedSearch();
+    updateUrl(searchFilter.value.trim());
 
     const filtered = allItems.filter(function filterItem(item) {
-      if (type !== 'All' && item.type !== type) {
+      const typeMatches = selectedType === "All" || item.type === selectedType;
+      if (!typeMatches) {
         return false;
       }
 
@@ -240,10 +131,10 @@
       }
 
       const haystack = [item.title, item.venue, item.year]
-        .map(function mapPart(part) {
-          return String(part || '').toLowerCase();
+        .map(function normalize(part) {
+          return String(part || "").toLowerCase();
         })
-        .join(' ');
+        .join(" ");
 
       return haystack.indexOf(query) !== -1;
     });
@@ -251,83 +142,77 @@
     render(filtered);
   }
 
-  function showToast(message) {
-    if (window.SiteToast && typeof window.SiteToast.show === 'function') {
-      window.SiteToast.show(message, { duration: 1500 });
-    }
-  }
-
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(text);
     }
 
-    return new Promise(function fallbackCopy(resolve, reject) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.setAttribute('readonly', 'readonly');
-      textarea.style.position = 'absolute';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-
-      const copied = document.execCommand('copy');
-      textarea.remove();
-
-      if (copied) {
-        resolve();
-      } else {
-        reject(new Error('Copy failed'));
-      }
-    });
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "readonly");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+    return Promise.resolve();
   }
 
-  list.addEventListener('click', function onListClick(event) {
-    const trigger = event.target.closest('.accordion-trigger');
-    if (trigger) {
-      toggleAccordion(trigger);
-      return;
-    }
-
-    const button = event.target.closest('.copy-bibtex');
-    if (!button) {
-      return;
-    }
-
-    const targetId = button.getAttribute('data-target');
-    const pre = targetId ? document.getElementById(targetId) : null;
-    if (!pre) {
-      return;
-    }
-
-    copyText(pre.textContent || '').then(
-      function onSuccess() {
-        showToast('BibTeX copied');
-      },
-      function onError() {
-        showToast('Copy failed');
+  listRoot.addEventListener("click", function onListClick(event) {
+    const toggle = event.target.closest(".detail-toggle");
+    if (toggle) {
+      const panelId = toggle.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) {
+        return;
       }
-    );
+
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      panel.hidden = isExpanded;
+      return;
+    }
+
+    const copyButton = event.target.closest("[data-copy]");
+    if (!copyButton) {
+      return;
+    }
+
+    const targetId = copyButton.getAttribute("data-copy");
+    const target = targetId ? document.getElementById(targetId) : null;
+    if (!target) {
+      return;
+    }
+
+    const originalText = copyButton.textContent;
+    copyText(target.textContent || "").then(function onCopied() {
+      copyButton.textContent = "Copied";
+      window.setTimeout(function restoreLabel() {
+        copyButton.textContent = originalText;
+      }, 1200);
+    });
   });
 
-  filter.addEventListener('change', applyFilter);
+  typeFilter.addEventListener("change", applyFilters);
+  searchFilter.addEventListener("input", applyFilters);
 
   fetch(source)
     .then(function parseResponse(response) {
       if (!response.ok) {
-        throw new Error('Failed to load publication data');
+        throw new Error("Failed to load publication data");
       }
       return response.json();
     })
-    .then(function loadData(data) {
-      highlightName = data.nameToHighlight || '';
+    .then(function hydrate(data) {
+      highlightedName = data.nameToHighlight || "";
       allItems = (data.publications || []).slice().sort(function byYearDesc(a, b) {
         return Number(b.year || 0) - Number(a.year || 0);
       });
-      applyFilter();
+      applyFilters();
     })
     .catch(function onError() {
-      results.textContent = '';
-      list.innerHTML = '<li class="empty-state">Unable to load publications data.</li>';
+      resultsRoot.textContent = "";
+      listRoot.innerHTML = '<li class="empty-state">Unable to load publication data.</li>';
     });
 })();

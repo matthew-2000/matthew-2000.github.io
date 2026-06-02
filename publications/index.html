@@ -1,89 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Publication list for Matteo Ercolino with filters and BibTeX." />
+  <meta
+    name="description"
+    content="Publication archive for Matteo Ercolino with filters, citation metadata, and BibTeX."
+  />
   <meta name="author" content="Matteo Ercolino" />
   <title>Publications | Matteo Ercolino</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles/main.css" />
-  <script>
-    (() => {
-      let stored = null;
-      try {
-        stored = localStorage.getItem('theme-preference');
-      } catch (error) {
-        stored = null;
-      }
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored || (systemDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.style.colorScheme = theme;
-    })();
-  </script>
-  <script defer src="../scripts/motion.js"></script>
-  <script defer src="../scripts/theme.js"></script>
-  <script defer src="../scripts/page-transitions.js"></script>
-  <script defer src="../scripts/toast.js"></script>
-  <script defer src="../scripts/publications.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script type="module" src="/scripts/site.js"></script>
+  <script type="module" src="/scripts/publications.js"></script>
 </head>
 <body data-page="publications">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="site-title" href="/">Matteo Ercolino</a>
-      <nav class="site-nav" aria-label="Primary">
-        <a href="/">Home</a>
-        <a aria-current="page" href="/publications/">Publications</a>
-        <a href="/cv/">CV</a>
-      </nav>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
-        <span class="theme-toggle-icon" aria-hidden="true"></span>
-        <span class="theme-toggle-text">Theme</span>
-      </button>
-    </div>
-  </header>
+  <div class="site-frame">
+    <header class="site-header">
+      <div class="shell site-header-inner">
+        <a class="brand" href="/" aria-label="Matteo Ercolino home">
+          <span class="brand-mark">ME</span>
+          <span class="brand-name">Matteo Ercolino</span>
+        </a>
 
-  <main id="main-content" class="container page-main page-subpage" data-publications-source="../data/publications.json">
-    <section class="section-tight page-intro">
-      <div class="page-intro-copy">
-        <p class="eyebrow">Research Output</p>
-        <h1>Publications</h1>
-        <p class="lead">Sorted by year in descending order, with detailed metadata, links, and BibTeX where available.</p>
-      </div>
-      <div class="page-intro-note panel">
-        <p>Use the filter to focus on publication type while keeping the full record accessible in a single reading surface.</p>
-      </div>
-    </section>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+        </button>
 
-    <section class="section" aria-labelledby="filter-title">
-      <div class="panel control-panel">
-        <h2 id="filter-title" class="sr-only">Filters</h2>
-        <div class="filter-row">
-          <label for="type-filter">Type</label>
-          <select id="type-filter" name="type-filter">
-            <option value="All">All</option>
-            <option value="Journal">Journal</option>
-            <option value="Conference">Conference</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Thesis">Thesis</option>
-          </select>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary">
+          <a href="/">Home</a>
+          <a aria-current="page" href="/publications/">Publications</a>
+          <a href="/cv/">CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <main
+      id="main-content"
+      class="page page-publications shell"
+      data-publications-source="/data/publications.json"
+    >
+      <section class="page-hero page-hero-publications" data-reveal>
+        <div class="page-hero-copy" data-reveal-child>
+          <p class="section-tag">Publications</p>
+          <h1>Publications</h1>
+          <p class="page-hero-summary">
+            A curated archive of peer-reviewed work and academic contributions, arranged for quick
+            scanning and detailed citation access.
+          </p>
         </div>
-        <div id="publication-results" class="result-count" aria-live="polite"></div>
-      </div>
-      <ol id="publication-list" class="publication-list publication-list-detailed" aria-live="polite"></ol>
-    </section>
-  </main>
+        <div class="page-hero-art" data-reveal-child>
+          <img src="/assets/atlas-field.svg" alt="" />
+        </div>
+      </section>
 
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <p>Matteo Ercolino</p>
-      <p>Publication archive and academic references</p>
-    </div>
-  </footer>
+      <section class="archive-layout section" data-reveal>
+        <aside class="archive-controls" data-reveal-child>
+          <div class="archive-controls-block">
+            <label for="search-filter">Search</label>
+            <input id="search-filter" name="search-filter" type="search" placeholder="Title, venue, or year" />
+          </div>
+
+          <div class="archive-controls-block">
+            <label for="type-filter">Type</label>
+            <select id="type-filter" name="type-filter">
+              <option value="All">All</option>
+              <option value="Journal">Journal</option>
+              <option value="Conference">Conference</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Thesis">Thesis</option>
+            </select>
+          </div>
+
+          <p id="publication-results" class="archive-results" aria-live="polite"></p>
+        </aside>
+
+        <div class="archive-listing" data-reveal-child>
+          <ol id="publication-list" class="publication-archive-list" aria-live="polite"></ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <p>Matteo Ercolino</p>
+        <p>Publication archive and academic references</p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
